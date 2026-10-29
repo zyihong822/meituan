@@ -1,0 +1,728 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>美团租赁数据中心</title><style>:root{--ink:#1b4429;--muted:#5e7089;--blue:#238b50;--bluebg:#f2faf5;--line:#e1f1e6;--paper:#fff;--bg:#f3faf5;--amber:#946019;--radius:10px}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}button,input,select{font:inherit;color:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}a{color:var(--blue)}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #a8e1bc;outline-offset:3px}button{border:1px solid #cde8d6;border-radius:6px;background:white;padding:8px 16px;min-height:36px}button:hover{background:#f3fbf6}button.primary{background:var(--blue);color:white;border-color:var(--blue)}button.primary:hover{background:#1b7040}.link{border:0;background:none;color:var(--blue);padding:4px 6px;min-height:30px}.sidebar{position:fixed;width:180px;inset:0 auto 0 0;background:#194729;color:#c5d1e1;padding:26px 16px;display:flex;flex-direction:column;z-index:5}.brand{display:flex;align-items:center;gap:10px;color:#fff;font-size:19px;font-weight:700;margin-bottom:42px}.brand b{background:#d9efdf;color:#1c4a2c;border-radius:9px;padding:3px 9px;font-size:22px}.side-label{font-size:12px;color:#9fb2ce;margin:0 12px 12px}.sidebar nav{display:flex;flex-direction:column;gap:8px}.sidebar a{color:inherit;text-decoration:none;border-radius:6px;padding:11px 13px}.sidebar a:hover,.sidebar a.active{background:#359555;color:white}.sidebar small{margin-top:auto;padding:12px;color:#afc0d7}.main{margin-left:180px}.topbar{height:64px;background:white;border-bottom:1px solid var(--line);padding:0 32px;display:flex;align-items:center;justify-content:space-between;color:var(--muted)}.pill{display:inline-flex;align-items:center;background:#fff3d6;color:#795316;font-size:12px;border-radius:20px;padding:5px 12px}.blue-pill{background:var(--bluebg);color:var(--blue)}main{max-width:1700px;margin:auto;padding:27px 30px 40px}.page-head{display:flex;align-items:start;justify-content:space-between;gap:20px;margin-bottom:20px}h1{font-size:28px;margin:0 0 5px;font-weight:650;letter-spacing:-.5px}h2{font-size:21px;margin:0;font-weight:650}h3{font-size:15px;margin:0 0 10px}p{margin:5px 0}.muted,.subtitle{color:var(--muted)}.subtitle{font-size:13px}.stamp{text-align:right;font-size:12px;color:var(--muted)}.panel{background:white;border-radius:var(--radius);padding:24px;margin:20px 0;scroll-margin-top:18px;border:1px solid #e8f4ec}.filters{margin-top:0}.filter-grid{display:grid;grid-template-columns:1.45fr 1fr 1fr 1fr 1.4fr;gap:16px}.field{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted)}.field input,.field select{width:100%;min-width:0;border:1px solid #cfd9e7;background:white;border-radius:6px;min-height:38px;padding:7px 9px;font-size:13px;color:var(--ink)}.date-fields{display:flex;gap:5px;align-items:center}.date-fields input{font-size:12px;padding:7px 5px}.filter-bottom{display:flex;justify-content:space-between;gap:16px;align-items:end;margin-top:16px}.filter-secondary{display:flex;gap:16px;align-items:end;flex-wrap:wrap}.filter-secondary .field{min-width:180px}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.filter-tip{margin-top:12px;font-size:12px;color:var(--muted)}.quick{display:flex;gap:4px;margin-top:5px}.quick button{min-height:24px;padding:1px 6px;border:0;font-size:11px;color:var(--blue)}.error{color:#b83c39;font-size:13px;min-height:0}.error:empty{display:none}.section-head{display:flex;justify-content:space-between;gap:16px;align-items:start;margin-bottom:17px}.section-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.segmented{display:inline-flex;background:#edf7f0;padding:4px;border-radius:7px;gap:2px}.segmented button{border:0;min-width:78px;padding:5px 11px;background:none;color:var(--muted);font-size:13px}.segmented button[aria-pressed=true]{background:white;color:var(--blue);box-shadow:0 0 0 1px #d1eddb}.compact-select{border:1px solid #d7f0e0;background:#f8fdfa;border-radius:6px;padding:8px;color:var(--blue);font-size:12px}.summary{display:grid;grid-template-columns:repeat(4,1fr);background:#f6fcf8;padding:15px 0;border-radius:7px;margin:15px 0}.summary>div{padding:0 20px;border-right:1px solid var(--line)}.summary>div:last-child{border:0}.label{font-size:12px;color:var(--muted)}.number{font-size:29px;font-weight:650;font-variant-numeric:tabular-nums;margin-top:3px;letter-spacing:-.6px}.number.sm{font-size:18px;letter-spacing:0;line-height:2}.funnel-scroll{overflow-x:auto}.funnel-grid{min-width:850px}.funnel-row{display:grid;grid-template-columns:235px minmax(200px,1fr) 110px 120px 150px;gap:14px;align-items:center;padding:10px 8px;border-radius:5px;width:100%;border:none;text-align:left;background:transparent}.funnel-row:not(.funnel-header){cursor:pointer}.funnel-row:not(.funnel-header):hover{background:#f3fbf6}.funnel-row.hot{background:#fff5e7}.funnel-header{font-size:11px;color:var(--muted);padding-bottom:13px}.step{display:flex;align-items:center;gap:11px}.step i{font-style:normal;background:#eef9f2;border-radius:6px;font-size:11px;font-weight:600;color:#587598;min-width:26px;padding:5px;text-align:center}.step strong{font-size:13px;font-weight:600}.step small{display:block;color:var(--muted);font-size:10px;margin-top:1px}.bar-track{height:30px;background:#eff8f2;border-radius:4px;display:flex;justify-content:center;align-items:center;position:relative}.bar{height:30px;border-radius:4px;background:#40b869;min-width:0;transition:width .2s}.bar.light{background:#d0efdb}.bar-label{position:absolute;font-size:12px;color:white;font-weight:600;pointer-events:none}.bar-label.dark{color:#276f3f}.stat{font-variant-numeric:tabular-nums;font-size:16px;font-weight:600}.rate{font-size:13px;font-variant-numeric:tabular-nums}.loss{color:var(--muted);font-size:12px}.hot .loss{color:var(--amber)}.notes{border-top:1px solid var(--line);margin-top:12px;padding-top:12px;font-size:12px;color:var(--muted)}.notes p{margin:4px 0}.scope{color:var(--blue);background:#f2fbf5;border-radius:5px;padding:8px 12px;font-size:12px;margin:10px 0}.branch{background:#f7fcf9;padding:17px;margin-top:16px;border-radius:7px}.branch-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.branch-head h3{margin:0}.branch-chain{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.branch-node{position:relative;padding-right:10px}.branch-node:not(:last-child):after{content:'→';position:absolute;right:0;top:24px;color:#7d98bc}.branch-node small{color:var(--muted);font-size:11px}.branch-node b{font-size:22px;display:block;font-weight:650}.notice{background:#fff6e6;border-radius:6px;padding:14px 17px;color:#805a22;font-size:12px;display:flex;gap:30px;align-items:center}.notice strong{font-size:17px;color:#8c5a13}.notice .left{min-width:300px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.kpi{padding:4px 0}.platform{background:#f7fcf9;padding:18px;border-radius:7px;margin-bottom:20px}.platform-head{display:flex;justify-content:space-between;gap:20px;margin-bottom:10px}.platform-head h3{margin:0}.internal{grid-template-columns:repeat(5,1fr);margin:12px 0 20px}.kpi button{border:0;background:none;text-align:left;padding:0;min-height:0;color:var(--muted);font-size:12px}.kpi button:hover{text-decoration:underline}.kpi small{font-size:10px;color:var(--muted)}.table-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0}.table-group{display:flex;border-bottom:1px solid var(--line);gap:20px}.table-group button{border:0;border-radius:0;color:var(--muted);padding:11px 4px;font-size:13px;background:transparent;border-bottom:3px solid transparent}.table-group button[aria-selected=true]{color:var(--blue);border-bottom-color:var(--blue);font-weight:600}.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:13px}th{background:#eff9f2;color:#526d8e;text-align:right;font-weight:500;font-size:11px;padding:12px 14px}td{padding:16px 14px;text-align:right;border-top:1px solid #e7f5ec;font-variant-numeric:tabular-nums}th:first-child,td:first-child{text-align:left;position:sticky;left:0;z-index:1;min-width:210px}th:first-child{background:#eff9f2}td:first-child{background:white}tr:nth-child(even) td{background:#fafdfb}tr:hover td{background:#f4fbf6}th button{font-size:inherit;color:inherit;padding:0;min-height:20px;border:0;background:none}th button:hover{background:none;color:var(--blue)}.product-name{font-size:13px;font-weight:550}.product-id{font-size:10px;color:var(--muted);margin-top:3px}.table-footer{display:flex;justify-content:space-between;gap:15px;margin:14px 0;align-items:center;color:var(--muted);font-size:12px}.pagination{display:flex;gap:10px;align-items:center}.pagination button{padding:5px 10px;font-size:12px;min-height:30px}.empty{text-align:center;padding:45px;color:var(--muted);background:#f8fcf9;border-radius:6px}.bottom-notice{padding:15px 20px;background:#eaf8ef;border-radius:8px;font-size:12px;color:#536b89}.bottom-notice strong{display:block;margin-bottom:5px;color:var(--ink)}#toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,20px);padding:12px 22px;border-radius:8px;background:#1b4a2b;color:white;opacity:0;pointer-events:none;transition:.2s;z-index:20;max-width:90vw}#toast.show{opacity:1;transform:translate(-50%,0)}dialog{width:min(660px,92vw);max-height:85vh;border:none;border-radius:12px;padding:0;box-shadow:0 25px 80px #14372040;color:var(--ink)}dialog::backdrop{background:#153d2366}.dialog-head{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:white}.dialog-head h2{font-size:19px}.dialog-body{padding:22px 24px;font-size:14px}.dialog-body p{margin:8px 0 16px}.dialog-body table{font-size:12px}.dialog-body th,.dialog-body td{position:static!important}.dialog-body ul{padding-left:20px;line-height:1.9}.dialog-footer{padding:15px 24px;border-top:1px solid var(--line);text-align:right}.field-check{display:flex;align-items:center;gap:10px;padding:8px;border-bottom:1px solid var(--line)}.dialog-actions{display:flex;justify-content:end;gap:8px}.badge-soft{background:#eef9f2;border-radius:4px;font-size:11px;padding:2px 6px;color:#587598}.help-link{white-space:nowrap}.demo-warning{font-size:11px;color:var(--muted);text-align:right;margin-top:8px}
+@media(min-width:1600px){.funnel-row{grid-template-columns:270px minmax(250px,1fr) 130px 140px 170px;gap:20px}}
+@media(max-width:1150px){.filter-grid{grid-template-columns:repeat(3,1fr)}.sidebar{width:152px}.main{margin-left:152px}main{padding:22px 20px}.section-head{flex-wrap:wrap}.filter-bottom{flex-wrap:wrap}.summary{grid-template-columns:repeat(2,1fr);gap:12px}.summary>div:nth-child(2){border:0}.internal{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:750px){.sidebar{position:static;width:auto;padding:12px 16px;display:block}.brand{margin:0;font-size:17px}.side-label,.sidebar small{display:none}.sidebar nav{flex-direction:row;margin-top:12px}.sidebar a{padding:6px 10px;font-size:12px}.main{margin:0}.topbar{padding:10px 16px;height:auto;gap:10px;font-size:11px}.topbar .pill{font-size:10px;padding:4px 7px}main{padding:18px 12px}.page-head{display:block}.stamp{text-align:left;margin-top:10px}h1{font-size:24px}.panel{padding:16px}.filter-grid{grid-template-columns:1fr 1fr}.field:first-child{grid-column:1/-1}.filter-secondary{width:100%;display:grid;grid-template-columns:1fr 1fr}.filter-secondary .field{min-width:0;grid-column:auto}.filter-bottom{align-items:stretch}.summary .number{font-size:24px}.summary .number.sm{font-size:15px}.summary>div{padding:0 12px}.branch-chain{display:flex;overflow-x:auto;gap:24px}.branch-node{min-width:140px}.notice{display:block}.notice .left{min-width:0;margin-bottom:10px}.kpis,.internal{grid-template-columns:repeat(2,1fr)}.section-controls{gap:6px}.table-tools{align-items:start;flex-direction:column}.table-group{gap:16px}.table-footer{align-items:start;flex-direction:column}.platform-head{display:block}.page-head .subtitle{font-size:12px}.date-fields input{width:46%}.filter-tip{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+/* V2.2: independent time filters and one unified product table */
+.time-filter-bar{display:flex;justify-content:space-between;align-items:center;gap:18px}.time-caption{font-size:12px;color:var(--muted);margin-bottom:8px}.time-filter-hint{font-size:12px;color:var(--muted);margin:10px 0 0}.date-picker-root{position:relative;display:inline-block;z-index:4;max-width:100%}.date-picker-root:has(.date-popup){z-index:12}.date-control{display:flex;align-items:center;gap:14px}.date-unit{display:flex;border:1px solid #238b50;border-radius:6px;overflow:hidden;flex-shrink:0}.date-unit button{border:0;border-radius:0;color:#238b50;min-width:43px;min-height:34px;padding:6px 12px;background:white;font-size:13px}.date-unit button[aria-pressed=true]{background:#238b50;color:white}.date-trigger{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:36px;border:1px solid #cde8d6;background:white;padding:7px 10px;font-size:13px;font-weight:400;white-space:nowrap;min-width:310px}.date-trigger:hover{background:white;border-color:#51a874}.date-trigger svg{color:#8b9fc2;flex-shrink:0}.date-popup{position:absolute;left:100px;top:44px;display:flex;width:674px;background:white;border:1px solid #e4eaf2;border-radius:5px;box-shadow:0 8px 25px #19492924;overflow:hidden}.date-shortcuts{width:120px;flex-shrink:0;background:#fafbfc;padding:6px 0}.date-shortcuts button{display:block;width:100%;min-height:35px;text-align:left;border:0;border-radius:0;font-size:12px;padding:8px 16px;background:transparent}.date-shortcuts button:hover,.date-shortcuts button.active{color:#238b50;background:#f0f8f3}.calendar-content{flex:1;min-width:0}.calendar-pair{display:flex}.calendar-month{width:50%;padding:8px 12px 12px}.month-head{height:32px;display:flex;align-items:center;justify-content:space-between;gap:3px;margin-bottom:10px}.month-head strong{font-size:13px;font-weight:500}.month-head button{min-height:24px;min-width:18px;padding:0 4px;border:0;font-size:17px;color:#8ca1c2;background:transparent}.calendar-week,.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}.calendar-week{font-size:12px;color:#7d8794;margin-bottom:7px}.calendar-week span{padding:3px}.calendar-day{min-height:31px;padding:0;border:0;border-radius:0;background:white;font-size:12px;position:relative}.calendar-day.other{color:#9cacc8}.calendar-day:disabled{background:#f4f5f8;color:#bac4d8;opacity:1}.calendar-day.between{background:#f0faf3}.calendar-day.selected,.month-grid button.selected{background:#238b50;color:white;border-radius:3px}.calendar-day:not(:disabled):hover{background:#e2f2e8;color:#1b7040}.calendar-day.selected:hover{background:#238b50;color:white}.calendar-footer{display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid #edf0f5}.calendar-hint{font-size:11px;color:#6b7b90;flex:1}.calendar-footer button{font-size:12px;min-height:29px;padding:3px 12px}.calendar-footer .date-confirm{background:#238b50;border-color:#238b50;color:white}.month-select{width:100%;padding:14px 20px}.month-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.month-grid button{border:0;background:#f7fcf9;font-size:13px}.month-grid button.between{background:#f0faf3}.month-grid button.selected{background:#238b50}.product-filter-form{padding:17px 18px;background:#f7fcf9;border:1px solid var(--line);border-radius:7px;margin:18px 0}.product-filter-grid{display:flex;gap:18px;align-items:end;flex-wrap:wrap}.product-filter-grid .field{min-width:170px;flex:1}.product-filter-grid .product-time{flex:0 0 auto;min-width:0}.product-filter-grid .product-search{min-width:220px}.product-filter-grid .actions{padding-bottom:1px}.product-filter-grid .field .date-unit button{color:#238b50}.product-filter-grid .field .date-unit button[aria-pressed=true]{color:white}.product-filter-form .date-popup{left:0}.product-filter-form .date-trigger{min-width:295px}.product-filter-note{color:var(--muted);font-size:12px;margin-top:12px}.unified-table-tools{display:flex;justify-content:space-between;align-items:center;margin:12px 0;color:var(--muted);font-size:12px}.table-scroll table{min-width:1280px}#products .table-scroll th:first-child,#products .table-scroll td:first-child{box-shadow:3px 0 5px #23623810}#applied{font-size:12px;margin-top:6px}.filters{padding:20px 24px}.product-filter-form .date-control{gap:8px}.dialog-body .mini-funnel{min-width:0}.dialog-body .mini-funnel td:first-child{min-width:0}.dialog-body .mini-funnel th:first-child{min-width:0}
+@media(max-width:1150px){.product-filter-grid .product-time{flex:0 0 100%}.date-popup{left:0}.filters{padding:18px}}
+@media(max-width:750px){.time-filter-bar{flex-wrap:wrap}.date-control{gap:8px;flex-wrap:wrap}.date-trigger{min-width:0;width:100%;font-size:12px;gap:8px}.date-picker-root{display:block;width:100%}.date-popup{position:fixed;left:12px;right:12px;top:15vh;width:auto;max-height:75vh;overflow:auto;flex-direction:column}.date-shortcuts{width:auto;display:flex;justify-content:space-around;flex-shrink:0}.date-shortcuts button{text-align:center;width:auto;flex:1;padding:8px}.calendar-pair{display:block;max-height:48vh;overflow-y:auto}.calendar-month{width:100%}.calendar-day{min-height:33px}.calendar-footer{position:sticky;bottom:0;background:white}.product-filter-form .date-popup{left:12px}.product-filter-grid{display:block}.product-filter-grid .field{margin-bottom:14px;min-width:0}.product-filter-form .date-trigger{min-width:0}.product-filter-grid .actions{margin-top:12px}.filters{padding:16px}.date-control .date-trigger{flex:1;min-width:0;flex-basis:230px}.calendar-week{margin-bottom:3px}.unified-table-tools{gap:12px;flex-wrap:wrap}}
+/* V2.3: paired audience and volume metrics, parallel product branches */
+.flow-legend{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;font-size:12px;color:var(--muted);border-bottom:1px solid var(--line);padding:0 0 16px}.flow-legend>span{display:flex;align-items:center;gap:7px}.flow-legend>span:last-child{margin-left:auto}.dot{width:7px;height:7px;display:inline-block;border-radius:50%}.dot.blue{background:#4ec175}.dot.amber{background:#d09b42}.business-flow{padding:26px 0 10px;max-width:1120px;margin:auto}.flow-layer{display:grid;grid-template-columns:104px minmax(0,1fr);position:relative;gap:22px;margin-bottom:32px}.layer-index{display:flex;align-items:center;gap:10px;color:#6d7e96;font-size:12px;align-self:start;padding-top:18px}.layer-index b{display:grid;place-items:center;width:28px;height:28px;flex-shrink:0;background:#effaf3;border:1px solid #e0f4e7;border-radius:50%;color:#489f66;font-size:11px;letter-spacing:.5px}.center-node{width:calc(50% - 12px);justify-self:center;position:relative}.journey-card{position:relative;background:#fff;border:1px solid #d9f1e1;border-top:3px solid #49bf71;border-radius:10px;box-shadow:0 4px 16px #27704006;overflow:hidden}.journey-card header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:14px 17px 9px}.journey-card h3{font-size:15px;margin:0}.source-badge{font-size:10px;color:#667e9d;background:#f0faf3;border-radius:4px;padding:3px 6px;white-space:nowrap}.paired-metrics{display:grid;grid-template-columns:1fr 1fr;padding:0 8px 8px}.paired-metric{border:0;background:transparent;text-align:left;padding:8px 10px;border-radius:6px;min-width:0}.paired-metric+ .paired-metric{border-left:1px solid #e7f5ec;border-radius:0 6px 6px 0}.paired-metric>span{display:block;font-size:12px;color:#60748e}.paired-metric strong{display:block;font-size:30px;line-height:1.4;font-weight:650;font-variant-numeric:tabular-nums;letter-spacing:-.6px;margin-top:4px}.paired-metric em,.overview-pair em,.metric-detail-pair em{font-size:11px;font-weight:400;color:#73839a;font-style:normal;letter-spacing:0}.paired-metric b{font-size:9px;color:#9d6b26;background:#fff0cd;padding:1px 3px;border-radius:3px;font-weight:500}.journey-card footer{background:#f7fcf9;border-top:1px solid #edf7f0;color:#728199;font-size:10px;line-height:1.7;padding:8px 17px;min-height:34px}.connector-above:before,.rental-continue:before{content:'';position:absolute;width:1px;height:32px;left:50%;top:-32px;background:#a9dcba}.connector-above:after,.rental-continue:after,.split-node:after{content:'';position:absolute;top:-6px;left:calc(50% - 3px);width:6px;height:6px;border-right:1px solid #98d4ac;border-bottom:1px solid #98d4ac;transform:rotate(45deg)}.split-nodes,.lower-nodes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;position:relative;align-items:start}.split-nodes:before{content:'';position:absolute;left:25%;right:25%;height:16px;border-top:1px solid #a9dcba;border-left:1px solid #a9dcba;border-right:1px dashed #cda771;top:-16px}.split-nodes:after{content:'';position:absolute;width:1px;height:16px;left:50%;top:-32px;background:#a9dcba}.split-node,.rental-continue{position:relative;min-width:0}.split-node:nth-child(2):after{border-color:#cda771}.estimated.journey-card{border-color:#e6d4b5;border-top-color:#c8994f;background:#fffdfa}.estimated .source-badge{background:#fff0d8;color:#9b712f}.estimated .paired-metric:hover{background:#fff4df}.estimated.journey-card footer{background:#fff8ec;border-color:#f2e6d1;color:#987744}.formula-link{display:block;border:0;color:#9d6a25;font-size:11px;padding:1px 0;min-height:24px;background:none}.formula-link:hover{background:none;text-decoration:underline}.complete.journey-card{border-top-color:#37978b}.complete .paired-metric strong{color:#267f75}.group-reference{padding:10px 18px;color:#7d705b;font-size:12px;line-height:1.9;max-width:430px}.group-reference h3{margin:9px 0;color:#7c6543;font-size:14px}.estimate-mark{border:1px solid #e5d1ad;color:#977035;font-size:10px;border-radius:4px;padding:3px 7px}.group-reference p{margin:6px 0}.reading-tip{align-self:center;padding-left:18px;font-size:12px;color:#8b98aa;line-height:2}.flow-footnote{padding:12px 15px;background:#f4fbf6;border-radius:6px;color:#687b95;font-size:12px}.overview-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.overview-tile{border:1px solid var(--line);border-radius:9px;padding:16px}.overview-title{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:16px}.overview-title h3{font-size:14px;margin:0}.overview-title small{font-size:10px;color:#8795a9}.overview-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.overview-pair button{border:0;text-align:left;padding:3px;min-width:0;background:transparent}.overview-pair button:hover{background:#f6fcf8}.overview-pair span{display:block;font-size:11px;color:#6d7e94}.overview-pair strong{display:block;font-size:25px;font-weight:650;letter-spacing:-.5px;font-variant-numeric:tabular-nums;margin-top:5px}.overview-tile.estimated{background:#fffbf3;border-color:#eadabd}.overview-tile.estimated .overview-title small{color:#aa7b36}.estimate-details{border:1px solid #eadabd;border-radius:7px;background:#fffbf4;padding:12px 16px;color:#8b6c3d;margin-top:18px;font-size:12px}.estimate-details summary{cursor:pointer;font-weight:500}.estimate-equations{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:15px 0}.estimate-equations>div{padding:12px;border-radius:6px;background:#fff4df}.estimate-equations span{display:block;font-size:12px;color:#8c713f}.estimate-equations strong{display:block;margin-top:8px;font-size:17px;font-weight:550;font-variant-numeric:tabular-nums}.flow-matrix-wrap{overflow:auto;margin:20px 0;border:1px solid var(--line);border-radius:7px}.flow-matrix th:first-child,.flow-matrix td:first-child{min-width:155px}.flow-matrix th,.flow-matrix td{padding:16px 12px}.flow-matrix .estimate-row td{background:#fff8ea;color:#946d32}.metric-detail-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:#f6fcf8;padding:16px;border-radius:8px;margin-bottom:20px}.metric-detail-pair small{display:block;color:#6b7f9b}.metric-detail-pair strong{display:block;font-size:30px;margin-top:7px}.dialog-body .mini-funnel{white-space:normal}.dialog-body .mini-funnel td,.dialog-body .mini-funnel th{padding:12px 8px}
+@media(max-width:1200px){.flow-layer{grid-template-columns:86px minmax(0,1fr);gap:12px}.center-node{width:60%}.overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.journey-card header{flex-wrap:wrap}.paired-metric strong{font-size:27px}.paired-metric>span{font-size:11px}}
+@media(max-width:750px){.business-flow{overflow-x:auto;padding:24px 2px 8px}.flow-layer{min-width:630px;grid-template-columns:70px minmax(0,1fr);gap:12px}.layer-index{font-size:10px;gap:6px}.layer-index b{width:23px;height:23px}.center-node{width:55%}.journey-card header{padding:12px}.journey-card h3{font-size:13px}.journey-card footer{padding:8px 12px}.paired-metrics{padding:0 4px 8px}.paired-metric{padding:7px}.paired-metric strong{font-size:25px}.split-nodes,.lower-nodes{gap:16px}.group-reference{padding:6px 12px;font-size:11px}.flow-legend>span:last-child{margin-left:0}.overview-grid{grid-template-columns:1fr}.overview-pair strong{font-size:28px}.estimate-equations{grid-template-columns:1fr}.section-controls .segmented button{min-width:70px}.flow-footnote{font-size:11px}}
+/* V2.4: two proportional visual funnels; detailed metrics stay in dashboard */
+.dual-funnels{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:24px 0 10px}.visual-funnel{min-width:0;padding:0 20px}.visual-funnel:first-child{border-right:1px solid var(--line);padding-left:0}.visual-funnel:last-child{padding-right:0}.visual-funnel-heading{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}.visual-funnel-heading h3{font-size:16px;margin:0}.visual-funnel-heading span{font-size:11px;color:var(--muted)}.visual-funnel svg{display:block;width:100%;overflow:visible}.funnel-svg-name{font-size:11px;fill:#657791}.funnel-svg-value{font-size:21px;font-weight:650;fill:#236138;font-variant-numeric:tabular-nums}.funnel-svg-unit{font-size:10px;font-weight:400;fill:#7d8da3}.funnel-guide{font-size:10px;fill:#97a6b9}.funnel-leader{fill:none;stroke:#b9dec6;stroke-width:1}.funnel-connect{fill:none;stroke:#b7dec4;stroke-width:1;stroke-dasharray:3 3}.estimated-line{stroke:#c8a566;stroke-dasharray:3 3}.visual-funnel [data-detail]{cursor:pointer;outline:none}.visual-funnel [data-detail]:hover polygon,.visual-funnel [data-detail]:focus-visible polygon{filter:brightness(1.12);stroke:#2c7e48;stroke-width:2}.visual-funnel [data-detail]:hover .funnel-svg-name,.visual-funnel [data-detail]:focus-visible .funnel-svg-name{fill:#39a25d}.visual-funnel [data-detail]:focus-visible .funnel-svg-value{text-decoration:underline}
+@media(max-width:1050px){.dual-funnels{gap:16px}.visual-funnel{padding:0 8px}.funnel-svg-name{font-size:12px}.funnel-svg-value{font-size:23px}}
+@media(max-width:750px){.dual-funnels{grid-template-columns:1fr;gap:26px}.visual-funnel:first-child{border-right:0;border-bottom:1px solid var(--line);padding-bottom:20px}.visual-funnel,.visual-funnel:last-child{padding-left:0;padding-right:0}.visual-funnel svg{min-width:360px}.visual-funnel{overflow:auto}.funnel-svg-value{font-size:22px}}
+/* V2.5: one continuous, paired-metric funnel */
+#funnel .section-head{margin-bottom:20px}#funnel .flow-legend{border-bottom:0;padding-bottom:0;font-size:11px;gap:10px 20px}#funnel .flow-footnote{background:none;border-top:1px solid #e9f5ed;border-radius:0;padding:15px 0 0;margin-top:3px;font-size:11px;color:#7c8a9e}.unified-funnel-wrap{width:100%;overflow:auto;padding:15px 0 5px}.unified-funnel{display:block;width:100%;max-width:1140px;margin:0 auto;min-width:720px;font-family:inherit}.unified-stage{cursor:pointer;outline:none}.stage-fill{transition:filter .15s,stroke .15s}.unified-stage:hover .stage-fill,.unified-stage:focus-visible .stage-fill{filter:brightness(.96);stroke:#4bb56f;stroke-width:2}.unified-stage:focus-visible .unified-stage-name{text-decoration:underline}.unified-stage-name{font-size:15px;font-weight:600;fill:#2b7945;letter-spacing:1px}.unified-metric-label{font-size:11px;fill:#54769f}.unified-metric-number{font-size:26px;font-weight:650;fill:#2a7945;font-variant-numeric:tabular-nums;letter-spacing:-.4px}.unified-unit{font-size:11px;font-weight:400;letter-spacing:0}.unified-divider{stroke:#597daf;stroke-opacity:.2;stroke-width:1}.unified-stage[data-detail=order] text,.unified-stage[data-detail=deal] text{fill:white}.unified-stage[data-detail=order] .unified-metric-label,.unified-stage[data-detail=deal] .unified-metric-label{fill:#e9f7ee}.unified-stage[data-detail=order] .unified-divider,.unified-stage[data-detail=deal] .unified-divider{stroke:white;stroke-opacity:.24}.unified-stage.is-estimate .unified-stage-name{fill:#957132;font-size:14px}.unified-stage.is-estimate .unified-metric-label{fill:#9e7e47;font-size:10px}.unified-stage.is-estimate .unified-metric-number{fill:#916b2b;font-size:23px}.unified-stage.is-estimate .unified-divider{stroke:#b28b42}.unified-rail path{stroke:#e5f5ea;stroke-width:1}.unified-rail circle{fill:white;stroke:#dcf2e3;stroke-width:1}.unified-rail text{font-size:11px;fill:#8497b0}.unified-bridges path{fill:none;stroke:#b6e6c6;stroke-width:1.5}.branch-caption path{stroke:#d8c39d;stroke-width:1;stroke-dasharray:3 3}.branch-caption text{font-size:11px;fill:#a19176}.branch-caption .branch-caption-title{font-size:13px;fill:#967a4e;font-weight:500}
+@media(min-width:1500px){.unified-funnel{max-width:1040px}}@media(max-width:750px){.unified-funnel-wrap{padding-top:14px}.unified-funnel{min-width:690px}#funnel .flow-legend>span:last-child{width:100%;font-size:10px}.unified-stage-name{font-size:16px}.unified-metric-label{font-size:12px}.unified-stage.is-estimate .unified-metric-label{font-size:11px}}
+/* V2.6: proportional product split and per-stage rates */
+.area-control{display:flex;align-items:center;gap:8px;margin-left:auto;color:#7c8a9e}.area-control .segmented{padding:2px}.area-control .segmented button{font-size:11px;min-width:68px;min-height:28px;padding:3px 8px}.funnel-rate{cursor:pointer;outline:none}.rate-caption{font-size:11px;fill:#8293aa}.rate-pair{font-size:12px;fill:#7a8da6}.rate-pair tspan:not(.rate-separator){fill:#359656;font-weight:650;font-size:14px;font-variant-numeric:tabular-nums}.rate-separator{fill:#c0cbda}.estimate-rate .rate-caption{fill:#a48a5f}.estimate-rate .rate-pair tspan:not(.rate-separator){fill:#9b7536}.funnel-rate:hover rect,.funnel-rate:focus-visible rect{fill:#f0faf3}.funnel-rate:focus-visible rect{stroke:#72cb90;stroke-width:1}.rate-formula{background:#f5fbf7;border-radius:7px;padding:15px 18px;margin:12px 0}.rate-formula small{display:block;color:#73859c}.rate-formula strong{display:block;color:#359555;font-size:25px;margin-top:5px}.rate-formula p{font-size:12px;line-height:1.9;margin-bottom:0}@media(max-width:750px){.area-control{margin-left:0;flex-wrap:wrap}.unified-funnel{min-width:780px}}
+/* V2.7: operational reporting layout */
+:root{--blue:#238b50;--bluebg:#f3fbf6;--ink:#25324a;--muted:#7a879a;--line:#e8ecf3;--bg:#f5f6f9}.sidebar{background:#fff;color:#64718a;border-right:1px solid #e9edf3}.brand{color:#245133}.sidebar a:hover,.sidebar a.active{background:#f2faf5;color:#50c176}.sidebar small,.side-label{color:#9aa5b6}.topbar{height:54px;padding:0 28px;font-size:12px}.topbar .pill{background:#f2f4f8;color:#8993a3;font-size:10px;padding:3px 8px}main{padding:25px 28px 40px}.page-head{align-items:center;margin-bottom:24px}h1{font-size:25px;letter-spacing:0}h2{font-size:17px}.panel{padding:22px 24px;border-radius:7px;box-shadow:none;border:1px solid #e9edf4;margin:16px 0}.section-head{align-items:center;margin-bottom:18px}.section-controls button:not(.info-button){font-size:12px;min-height:32px;padding:5px 12px}.info-button{display:inline-grid;place-items:center;width:16px;height:16px;min-height:16px;padding:0;border:1px solid #b6c0ce;border-radius:50%;font-size:10px;line-height:1;color:#98a5b8;margin-left:6px;vertical-align:2px;font-weight:500}.info-button:hover{color:#238b50;border-color:#238b50;background:#f5fcf8}.filters{padding:18px 24px}.time-caption{display:none}.stamp{font-size:11px}.stamp .link{font-size:11px}.overview-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:5px;padding:18px 0}.overview-tile{border:0;border-right:1px solid var(--line);border-radius:0;padding:0 18px}.overview-tile:last-child{border-right:0}.overview-title{margin-bottom:14px;gap:4px}.overview-title h3{font-size:12px;font-weight:600}.overview-title small{font-size:9px}.overview-pair{display:flex;flex-direction:column;gap:12px}.overview-pair button{padding:0;border-radius:3px}.overview-pair span{font-size:10px;color:#8792a4}.overview-pair strong{font-size:22px;line-height:1.2;margin-top:5px;font-weight:600;letter-spacing:0}.overview-pair em{font-size:9px}.overview-tile.estimated{background:transparent;border-color:var(--line)}.overview-tile.estimated .overview-title small{color:#b48d46}.compact-flow-scroll{overflow-x:auto}.compact-flow{min-width:740px}.compact-flow-head,.compact-flow-row{display:grid;grid-template-columns:270px minmax(190px,1fr) 210px;column-gap:24px;align-items:center}.compact-flow-head{min-height:50px;border-bottom:1px solid #edf0f6;margin-bottom:10px;font-size:11px;color:#919aac}.flow-data{display:grid;grid-template-columns:120px 65px 85px;align-items:center}.flow-data>span:not(:first-child){text-align:right}.flow-data .flow-label{font-size:12px;text-align:left;border:0;background:none;padding:0;min-height:30px;color:#50617c;display:flex;align-items:center;gap:6px}.flow-label:hover{color:#238b50}.flow-number{font-size:14px;font-weight:500;color:#33445e;font-variant-numeric:tabular-nums}.compact-flow-row{min-height:66px;position:relative}.flow-plot{display:flex;justify-content:flex-end;align-items:center;height:100%;padding:5px 0}.flow-band{height:52px;border:0;border-radius:0;padding:0;clip-path:polygon(0 0,100% 0,100% 100%,18px 100%);min-height:0;transition:filter .15s}.flow-band:hover{filter:brightness(.94)}.band-one{background:#67ca89}.band-two{background:#7ed29b}.band-four{background:#afe3c1}.band-five{background:#cdedd8}.band-one:hover{background:#67ca89}.band-two:hover{background:#7ed29b}.band-four:hover{background:#afe3c1}.band-five:hover{background:#cdedd8}.flow-band:focus-visible{outline:none;filter:brightness(.8)}.split-flow-row{min-height:114px}.split-flow-data .flow-data{height:55px}.split-flow-rates .compact-rate{height:55px}.split-band{height:100px;display:flex;clip-path:polygon(0 0,100% 0,100% 100%,18px 100%);overflow:hidden}.split-band button{border:0;border-radius:0;padding:8px 2px;min-width:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;overflow:hidden}.split-rental{background:#98dbaf;color:#2c7d48}.split-group{background:#f3e2bd;color:#97732b;border-left:3px solid white!important}.split-rental:hover{background:#89d5a3}.split-group:hover{background:#edd7aa}.split-band span{font-size:11px;white-space:nowrap}.split-band small{font-size:12px;font-weight:550;white-space:nowrap;font-variant-numeric:tabular-nums}.estimate-chip{font-size:9px;padding:1px 4px;background:#fff5df;border-radius:3px;color:#aa8644;white-space:nowrap}.flow-rate-cell{position:relative}.compact-rate{display:block;position:relative;width:100%;padding:6px 8px 6px 14px;border:0;border-left:1px solid #dff0e5;border-radius:0;text-align:left;background:transparent;min-height:52px}.compact-rate:before{content:'';position:absolute;top:0;left:-8px;width:8px;border-top:1px solid #dff0e5}.compact-rate:after{content:'';position:absolute;bottom:0;left:-8px;width:8px;border-top:1px solid #dff0e5}.compact-rate:hover{background:#f8fdfa}.compact-rate>span{display:block;color:#97a2b2;font-size:10px;margin-bottom:5px}.compact-rate>div,.rate-head>div{display:grid;grid-template-columns:1fr 1fr;gap:15px}.compact-rate strong{font-size:14px;font-weight:550;color:#425577;font-variant-numeric:tabular-nums}.compact-rate.estimated-rate strong{color:#a18650}.rate-head{padding:0 8px 0 14px}.rate-head>span{display:block;margin-bottom:5px;color:#667b99}.rate-head>div{font-size:10px;color:#9ba5b5}.rate-origin{padding-left:14px;color:#bdc6d4}.product-filter-form{padding:0;background:none;border:0;margin:20px 0}.product-filter-grid{gap:14px}.product-filter-grid .field{font-size:11px;min-width:145px}.product-filter-grid .product-search{min-width:180px}.product-filter-grid .product-time{min-width:0}.product-filter-form .date-trigger{min-width:270px;font-size:12px}.unified-table-tools{margin:15px 0 10px;font-size:11px}.table-scroll{border-radius:4px;border-color:#e9edf4}.table-scroll table{min-width:1420px}.table-scroll th{background:#f6fbf8;font-size:11px;color:#7c8ba1;padding:14px 12px}.table-scroll td{font-size:12px;padding:16px 12px}.table-scroll th:first-child,.table-scroll td:first-child{min-width:245px}.table-scroll th:first-child{background:#f6fbf8}.product-cell{display:flex;align-items:center;gap:12px}.product-cell img{width:48px;height:48px;object-fit:cover;border-radius:5px;background:#f3f5f8;flex-shrink:0}.product-cell .product-name{border:0;padding:0;min-height:22px;color:#344968;background:none;text-align:left;font-size:12px;font-weight:500}.product-cell .product-name:hover{color:#238b50}.product-id{font-size:10px;color:#9ca7b6;margin-top:4px}.product-amount-detail{display:flex;justify-content:space-between;padding:18px 0;font-size:14px}.product-amount-detail strong{color:#238b50;font-size:22px}.table-footer{margin-bottom:0}#products .section-head{margin-bottom:0}#funnel .section-head{margin-bottom:4px}
+@media(max-width:1350px){.overview-grid{grid-template-columns:repeat(3,minmax(0,1fr));padding:0}.overview-tile{padding:16px 20px}.overview-tile:nth-child(3){border-right:0}.overview-tile:nth-child(-n+3){border-bottom:1px solid var(--line)}.overview-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}.overview-title{margin-bottom:10px}.overview-pair strong{font-size:23px}.product-filter-grid .product-time{flex:0 0 100%}}@media(max-width:900px){.panel{padding:18px}.compact-flow-head,.compact-flow-row{column-gap:18px}.overview-tile{padding:15px}.page-head{margin-bottom:18px}}@media(max-width:750px){main{padding:18px 12px}.sidebar{border-bottom:1px solid #e8ecf3}.overview-grid{grid-template-columns:1fr 1fr}.overview-tile{border-right:1px solid var(--line)!important;border-bottom:1px solid var(--line)}.overview-tile:nth-child(2n){border-right:0!important}.overview-tile:nth-last-child(-n+2){border-bottom:0}.overview-pair{display:flex;gap:10px}.overview-pair strong{font-size:22px}.product-filter-grid .product-time{margin-bottom:14px}.product-filter-form .date-trigger{min-width:0}.product-filter-grid .product-search{min-width:0}.section-controls{gap:8px}.flow-panel .section-head{gap:12px}.page-head .stamp{text-align:left;margin-top:8px}.product-filter-grid .field{min-width:0}.page-head{display:block}}
+@media(max-width:750px){.compact-flow{min-width:410px}.compact-flow-head,.compact-flow-row{grid-template-columns:190px minmax(55px,1fr) 126px;column-gap:9px}.flow-data{grid-template-columns:90px 45px 55px}.flow-data .flow-label{font-size:10px;gap:3px}.flow-number{font-size:12px}.compact-flow-head{font-size:9px}.compact-rate{padding-left:8px;padding-right:0}.compact-rate strong{font-size:11px}.compact-rate>span{font-size:9px;white-space:nowrap}.compact-rate>div,.rate-head>div{gap:4px}.rate-head{padding-left:8px;padding-right:0}.rate-head>div{font-size:9px}.split-band span{font-size:9px}.split-band small{font-size:9px}.split-band button{padding:4px 0;gap:5px}.flow-band{clip-path:polygon(0 0,100% 0,100% 100%,10px 100%)}.split-band{clip-path:polygon(0 0,100% 0,100% 100%,10px 100%)}.estimate-chip{font-size:8px;padding:1px 2px}.flow-plot{padding:5px 0}.flow-band{height:48px}.compact-flow-row{min-height:64px}}
+/* V2.8: one query scope, paired column emphasis and between-stage arrows */
+.global-filter-grid{display:grid;grid-template-columns:minmax(390px,1.7fr) minmax(140px,.65fr) minmax(180px,1fr);gap:16px;align-items:end}.global-time .date-control{gap:10px}.global-time .date-trigger{min-width:290px}.global-filter-grid .field{font-size:11px}.global-filter-grid .id-search{grid-column:1/3}.global-filter-grid textarea{display:block;resize:vertical;min-height:38px;max-height:110px;border:1px solid #cfd9e7;border-radius:6px;padding:8px 10px;background:white;font:inherit;font-size:12px;color:var(--ink);line-height:1.6;width:100%}.global-filter-grid .actions{justify-content:flex-end;padding-bottom:1px;gap:8px}.global-filter-grid .actions button{font-size:12px;padding:7px 14px}.filter-status-row{display:flex;justify-content:space-between;gap:15px;margin-top:13px;font-size:11px;color:#8793a6}.filter-status-row #filterStatus{color:#ba8b3f}.filter-id-hint{font-size:11px;color:#b56b35;margin-top:8px}.filter-id-hint:empty{display:none}.metric-help{font-style:normal;font-size:10px;color:#a4afbf}.overview-pair button:hover .metric-help{color:#238b50}#metricTooltip{position:fixed;z-index:100;max-width:min(320px,calc(100vw - 16px));padding:11px 14px;border-radius:6px;background:#244d32;color:#fff;font-size:12px;line-height:1.7;box-shadow:0 6px 24px #244d3225;pointer-events:none}#metricTooltip[hidden]{display:none}.metric-column-toggle{border:0;border-radius:5px 5px 0 0;background:transparent;font-size:11px;min-height:42px;padding:4px 6px;color:#8a97aa;text-align:right;white-space:nowrap}.metric-column-toggle[aria-pressed=true]{color:#49bf71;background:#f2faf5;font-weight:600}.compact-flow .continuous-row{height:76px;min-height:76px}.continuous-row>.flow-data{height:100%}.continuous-row .flow-number{height:100%;display:flex;align-items:center;justify-content:flex-end;padding:0 8px}.compact-flow-head .flow-data{height:100%;align-items:stretch}.compact-flow-head .flow-data>span:first-child{display:flex;align-items:center}.selected-uv .flow-data>.uv-col,.selected-pv .flow-data>.pv-col{background:#f2fbf5;color:#4bc073}.compact-flow-head{margin-bottom:0}.continuous-row .flow-label{padding-right:8px}.continuous-row:last-child .flow-number{border-radius:0 0 5px 5px}.continuous-row .flow-rate-cell{height:76px;position:relative}.transition-rate{position:absolute;top:50%;left:0;width:100%;height:76px;z-index:2;background:transparent;border:0;border-radius:4px;padding:12px 0 8px 29px;text-align:left;min-height:0}.transition-rate:hover{background:#f9fdfa}.transition-rate svg{position:absolute;left:-7px;top:0;width:24px;height:76px;overflow:visible;fill:none;stroke:#aed8bc;stroke-width:1.2}.transition-rate .arrow-tip{stroke:#80c597}.transition-label{display:block;font-size:10px;color:#8697af;margin-bottom:6px;white-space:nowrap}.transition-label b{font-weight:400;color:#9aaac0}.transition-values{display:grid;grid-template-columns:1fr 1fr;gap:6px}.transition-values strong{display:block;font-size:13px;font-weight:550;font-variant-numeric:tabular-nums;padding:3px 4px;border-radius:3px;color:#697e9f}.selected-uv .transition-values>.uv-col,.selected-pv .transition-values>.pv-col{background:#f2fbf5;color:#4bc073}.rate-head{padding-left:29px}.rate-head>div{gap:6px}.band-three,.band-three:hover{background:#98dbaf}.unavailable-band,.unavailable-band:hover{background:repeating-linear-gradient(135deg,#edf0f6 0,#edf0f6 5px,#e5eaf2 5px,#e5eaf2 7px)}.detail-product-head{display:flex;align-items:center;gap:12px;margin-bottom:24px}.detail-product-head img{border-radius:6px}.detail-product-head strong{font-size:14px}.detail-product-head small{display:block;font-size:11px;color:#91a0b4;margin-top:6px}.detail-section-title{font-size:14px;margin:24px 0 12px}.detail-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid #e7f6ec;border-radius:7px;overflow:hidden}.detail-metrics>div{padding:16px 18px;border-right:1px solid #e7f6ec;border-bottom:1px solid #e7f6ec}.detail-metrics>div:nth-child(2n){border-right:0}.detail-metrics>div:nth-last-child(-n+2){border-bottom:0}.detail-metrics span{font-size:12px;color:#7b8ca3;display:block}.detail-metrics strong{display:block;font-size:23px;font-weight:600;margin-top:7px;font-variant-numeric:tabular-nums}.deal-metrics{background:#f9fdfa}.deal-metrics strong{color:#53c379}.detail-metrics small{font-size:10px;display:block;color:#8a9ab1;margin-top:4px}.dialog-body .detail-formula{font-size:11px;color:#8a9ab1;margin-top:12px}
+@media(max-width:1200px){.global-filter-grid{grid-template-columns:1fr 1fr}.global-time{grid-column:1/-1}.global-filter-grid .id-search{grid-column:1/-1}.global-filter-grid .actions{grid-column:1/-1;justify-content:flex-start}}@media(max-width:750px){.global-filter-grid{gap:12px}.global-time .date-control{gap:8px}.global-time .date-trigger{min-width:0}.global-filter-grid .id-search{grid-column:1/-1}.global-filter-grid textarea{font-size:11px}.filter-status-row{flex-wrap:wrap;gap:6px}.metric-column-toggle{font-size:9px;padding:3px 2px;min-height:38px}.continuous-row .flow-number{padding:0 4px}.transition-rate{padding-left:16px;left:0}.transition-rate svg{left:-8px;width:19px}.transition-label{font-size:8px}.transition-values{gap:1px}.transition-values strong{font-size:10px;padding:3px 1px}.rate-head{padding-left:16px}.transition-label b{font-size:10px}}
+/* V2.9: actual metric widths, full-cell switching and dotted metric tips */
+.continuous-row .flow-number{border:0;min-height:76px;border-radius:0;background:transparent;font:inherit;font-size:14px;font-weight:500;text-align:right;cursor:pointer}.selected-uv .continuous-row .uv-col,.selected-pv .continuous-row .pv-col{background:#f2fbf5;color:#4bc073}.transition-values [data-area]{cursor:pointer}.flow-plot{cursor:pointer}.flow-plot .flow-band{display:block;min-width:0;min-height:0;border:0;clip-path:polygon(0 0,100% 0,100% 100%,8% 100%);pointer-events:none;transition:width .25s ease}.plot-basis{font-size:10px;color:#8999af;text-align:right}.plot-unavailable{font-size:10px;color:#aab4c3;white-space:nowrap}.rental-mode-label{display:flex;align-items:center;gap:8px;font-size:11px;color:#8493a9}.rental-mode-label select{font-size:12px;border:1px solid #dcefe2;border-radius:5px;padding:6px 9px;background:white;color:#536c92}.funnel-estimate-note{font-size:10px;color:#9b8a66;margin-top:12px}.metric-dotted{display:inline-block!important;width:fit-content;border-bottom:1px dashed #9ba8b9;padding-bottom:3px;cursor:help;line-height:1.5}.overview-pair button:hover .metric-dotted{border-color:#238b50;color:#238b50}.overview-grid{grid-template-columns:repeat(4,minmax(0,1fr));padding:0}.overview-tile{padding:18px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}.overview-tile:nth-child(3){border-right:1px solid var(--line)}.overview-tile:nth-child(4){border-right:0}.overview-tile:nth-child(n+5){border-bottom:0}.overview-tile:nth-child(-n+3){border-bottom:1px solid var(--line)}.overview-pair{display:grid;grid-template-columns:1fr 1fr;gap:15px}.overview-pair strong{font-size:21px}.overview-title{margin-bottom:14px}.overview-title h3{font-size:12px;white-space:nowrap}.deal-overview{grid-column:span 2}.deal-overview .overview-pair{grid-template-columns:repeat(4,minmax(0,1fr))}.deal-overview .overview-pair strong{font-size:20px}.overview-title small{white-space:nowrap}.overview-tile.estimated{background:#fffdf8}
+@media(max-width:1350px){.overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.overview-tile:nth-child(2n){border-right:0}.overview-tile:nth-child(2n+1){border-right:1px solid var(--line)}.overview-tile:nth-child(n+5){border-bottom:1px solid var(--line)}.overview-tile.deal-overview{border-right:0;border-bottom:0}}@media(max-width:750px){.continuous-row .flow-number{font-size:12px}.overview-pair{display:grid;grid-template-columns:1fr;gap:12px}.overview-tile{padding:15px}.overview-title h3{font-size:11px}.deal-overview .overview-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.deal-overview .overview-pair strong{font-size:22px}.overview-tile:nth-last-child(-n+2){border-bottom:1px solid var(--line)}.overview-tile.deal-overview{border-bottom:0}.rental-mode-label{font-size:10px;gap:5px}.rental-mode-label select{font-size:10px;padding:6px}.plot-basis{font-size:8px}.flow-panel .section-head{align-items:center}.funnel-estimate-note{font-size:9px}.plot-unavailable{font-size:8px}}
+
+/* V3.1: independent product filters above the table */
+.time-filter-bar{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap}.time-filter-bar .time-scope{flex-basis:100%;color:#8793a6;font-size:11px}.product-filter-form{margin:20px 0 18px;padding:18px;background:#fbfdfc;border:1px solid #edf0f5;border-radius:6px}.product-filter-form .filter-status-row{min-height:17px}.product-filter-form .date-trigger{min-width:0}.product-filter-form .field{min-width:0}@media(max-width:750px){.time-filter-bar .global-time{width:100%}.product-filter-form{padding:14px}.product-filter-form .global-filter-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+/* V3.2: hovering any metric cell highlights its entire column. */
+.compact-flow .metric-column-toggle:hover{background:transparent}
+.compact-flow.selected-uv .metric-column-toggle.uv-col,
+.compact-flow.selected-pv .metric-column-toggle.pv-col{background:#f2fbf5}
+@media (hover:hover){
+ .compact-flow:has([data-area="0"]:hover) .flow-data>.uv-col,
+ .compact-flow:has([data-area="0"]:hover) .transition-values>.uv-col,
+ .compact-flow:has([data-area="1"]:hover) .flow-data>.pv-col,
+ .compact-flow:has([data-area="1"]:hover) .transition-values>.pv-col{background:#e5f6eb;color:#40b869}
+ .compact-flow .transition-rate:has([data-area]:hover){background:transparent}
+}
+
+/* V3.3: date on the first row, product fields on the second row. */
+.product-filter-form .rental-product-filter-grid{grid-template-columns:minmax(130px,.65fr) minmax(170px,1fr) minmax(260px,1.5fr) auto;align-items:end}
+.rental-product-filter-grid>.global-time{grid-column:1/-1}
+.product-filter-form .rental-product-filter-grid>.id-search{grid-column:auto}
+.product-filter-form .rental-product-filter-grid>.actions{grid-column:auto;flex-wrap:nowrap}
+.product-filter-form .filter-status-row:has(#filterStatus:empty){display:none}
+.table-scroll .product-total>th,.table-scroll .product-total>td{background:#f2fbf5;border-top:2px solid #ddf3e4;font-weight:600;white-space:nowrap;color:#344968;padding:17px 12px}
+.table-scroll .product-total>th{text-align:left;position:sticky;left:0;z-index:1}
+.table-scroll th .metric-dotted{white-space:nowrap}
+@media(max-width:1100px){.product-filter-form .rental-product-filter-grid{grid-template-columns:minmax(110px,.7fr) minmax(150px,1fr) minmax(200px,1.4fr)}.product-filter-form .rental-product-filter-grid>.actions{grid-column:1/-1;justify-content:flex-end}}
+@media(max-width:650px){.product-filter-form .rental-product-filter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-filter-form .rental-product-filter-grid>.id-search{grid-column:1/-1}}
+
+/* V3.7: prioritize deal metrics and reserve room for currency amounts. */
+#overviewGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#overviewGrid>.overview-tile{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+#overviewGrid>.overview-tile:nth-child(3n+1){border-right:0}
+#overviewGrid>.overview-tile:nth-last-child(-n+3){border-bottom:0}
+#overviewGrid>.deal-overview{grid-column:1/-1;background:#f9fdfa;border-right:0;border-bottom:1px solid var(--line);padding:24px}
+#overviewGrid .deal-overview .overview-title h3{font-size:14px}
+#overviewGrid .deal-overview .overview-pair{grid-template-columns:minmax(300px,2fr) repeat(3,minmax(125px,1fr));align-items:center;gap:24px}
+#overviewGrid .deal-overview .overview-pair>button{min-width:0}
+#overviewGrid .deal-overview .deal-amount-feature{grid-column:1;grid-row:1;padding-right:26px;border-right:1px solid #def4e6}
+#overviewGrid .deal-overview .deal-amount-feature strong{font-size:36px;line-height:1.35;color:#238b50;white-space:nowrap;letter-spacing:-.5px}
+#overviewGrid .deal-overview .overview-pair strong{white-space:nowrap}
+#products .table-scroll .amount-column{min-width:190px;white-space:nowrap;padding-left:22px;padding-right:22px}
+.deal-metrics .detail-amount-feature{grid-column:1/-1;grid-row:1;border-right:0;border-bottom:1px solid #e7f6ec;padding:22px}
+.deal-metrics .detail-amount-feature strong{font-size:34px;white-space:nowrap}
+.deal-metrics>div:nth-child(2){border-right:1px solid #e7f6ec}
+.deal-metrics>div:last-child{border-right:0}
+@media(max-width:1150px){#overviewGrid .deal-overview .overview-pair{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}#overviewGrid .deal-overview .deal-amount-feature{grid-column:1/-1;grid-row:1;border-right:0;border-bottom:1px solid #def4e6;padding:0 0 20px}}
+@media(max-width:750px){#overviewGrid{grid-template-columns:repeat(2,minmax(0,1fr))}#overviewGrid>.overview-tile{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}#overviewGrid>.overview-tile:nth-child(2n+1){border-right:0}#overviewGrid>.overview-tile:nth-last-child(-n+2){border-bottom:0}#overviewGrid>.deal-overview{padding:20px;border-right:0;border-bottom:1px solid var(--line)}#overviewGrid .deal-overview .deal-amount-feature strong{font-size:clamp(26px,6vw,36px)}#overviewGrid .deal-overview .overview-pair strong{font-size:20px}#overviewGrid .deal-overview .overview-pair{gap:18px 12px}.deal-metrics .detail-amount-feature strong{font-size:28px}}
+
+/* V3.8: unified green accent theme */
+:root{--blue:#238b50;--bluebg:#edf7f0;--bg:#f5f7f5}
+.band-one,.band-one:hover{background:#238b50}.band-two,.band-two:hover{background:#48a56c}.band-three,.band-three:hover{background:#78bb91}.band-four,.band-four:hover{background:#a4d1b4}.band-five,.band-five:hover{background:#c9e4d2}
+.sidebar a.active,.sidebar a:hover{background:#edf7f0;color:#237a47}
+button.primary:hover{background:#1b7040;border-color:#1b7040}
+#overviewGrid>.deal-overview,.deal-metrics{background:#f3faf5}
+#overviewGrid .deal-overview .deal-amount-feature strong,.deal-metrics strong{color:#238b50}
+input[type=checkbox]{accent-color:#238b50}
+
+/* V4.0: white background for the deal overview. */
+#overviewGrid>.deal-overview{background:#fff}
+
+/* V4.3: size each dashboard group for its metric count. */
+#overviewGrid{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:12px;border:0;padding:0;background:transparent}
+#overviewGrid>.overview-tile{grid-column:span 2;border:1px solid #e4ebe6;border-radius:7px;padding:18px;background:#fff;min-width:0}
+#overviewGrid>.overview-tile:nth-child(n){border:1px solid #e4ebe6}
+#overviewGrid>.deal-overview{grid-column:1/-1;padding:22px 24px;order:0}
+#overviewGrid>.metric-exposure{order:1}#overviewGrid>.metric-shop{order:2}#overviewGrid>.metric-rental{order:3}#overviewGrid>.metric-order{order:4}
+#overviewGrid>.metric-group{grid-column:span 1;order:5}
+#overviewGrid .overview-pair{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+#overviewGrid .overview-pair button{min-width:0}
+#overviewGrid .overview-pair strong{white-space:nowrap;font-size:23px}
+#overviewGrid .metric-group .overview-pair{grid-template-columns:minmax(0,1fr)}
+#overviewGrid .overview-title{margin-bottom:16px}
+#overviewGrid .deal-overview .overview-pair{grid-template-columns:minmax(300px,2fr) repeat(3,minmax(120px,1fr));gap:24px}
+#overviewGrid .deal-overview .deal-amount-feature strong{font-size:36px}
+@media(max-width:1450px){
+ #overviewGrid{grid-template-columns:repeat(10,minmax(0,1fr))}
+ #overviewGrid>.metric-exposure,#overviewGrid>.metric-shop{grid-column:span 4}
+ #overviewGrid>.metric-group{grid-column:span 2;order:3}
+ #overviewGrid>.metric-rental,#overviewGrid>.metric-order{grid-column:span 5;order:4}
+}
+@media(max-width:1150px){#overviewGrid .deal-overview .overview-pair{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}#overviewGrid .deal-overview .deal-amount-feature{grid-column:1/-1;grid-row:1}}
+@media(max-width:750px){
+ #overviewGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ #overviewGrid>.overview-tile:nth-child(n){grid-column:1/-1;padding:17px}
+ #overviewGrid>.metric-group{display:flex;align-items:center;justify-content:space-between;gap:20px;order:5}
+ #overviewGrid .metric-group .overview-title{margin:0}
+ #overviewGrid .metric-group .overview-pair{text-align:right}
+ #overviewGrid .metric-group .overview-pair button{text-align:right}
+ #overviewGrid .overview-pair strong{font-size:23px}
+ #overviewGrid .deal-overview .overview-pair{gap:18px 12px}
+ #overviewGrid .deal-overview .overview-pair strong{font-size:20px}
+ #overviewGrid .deal-overview .deal-amount-feature strong{font-size:clamp(26px,6vw,36px)}
+}
+
+/* V4.4: two compact single-metric cards alongside four paired groups. */
+@media(min-width:1451px){#overviewGrid{grid-template-columns:repeat(10,minmax(0,1fr))}#overviewGrid>.metric-rentalEstimated{grid-column:span 1;order:6}}
+#overviewGrid .metric-rentalEstimated .overview-pair{grid-template-columns:minmax(0,1fr)}
+@media(min-width:751px) and (max-width:1450px){#overviewGrid>.metric-rental,#overviewGrid>.metric-order{grid-column:span 4}#overviewGrid>.metric-rentalEstimated{grid-column:span 2;order:6}}
+@media(max-width:750px){#overviewGrid>.metric-rentalEstimated{display:flex;align-items:center;justify-content:space-between;gap:20px;order:6}#overviewGrid .metric-rentalEstimated .overview-title{margin:0}#overviewGrid .metric-rentalEstimated .overview-pair button{text-align:right}}
+
+/* V5.3: keep the shared date control available while scrolling. */
+:root{--sticky-filter-height:90px}
+#globalTimeBar{position:sticky;top:0;z-index:40;isolation:isolate;background:#fff;padding:14px 20px;box-shadow:0 4px 12px rgba(29,62,42,.06);align-items:center}
+#globalTimeBar .global-time{margin:0}
+#dashboard,#funnel,#products{scroll-margin-top:calc(var(--sticky-filter-height) + 16px)}
+@media(max-width:750px){#globalTimeBar{padding:12px;top:0}#globalTimeBar .date-control{margin:0}}
+
+/* V5.4: visible date shortcuts and a supplementary people-only estimate row. */
+.date-quick{display:inline-flex;border:1px solid #d5e3d9;border-radius:5px;overflow:hidden;flex-shrink:0}
+.date-quick button{border:0;border-right:1px solid #d5e3d9;border-radius:0;min-height:34px;padding:5px 16px;font-size:12px;color:#6b7b70;background:#fff}
+.date-quick button:last-child{border-right:0}
+.date-quick button[aria-pressed=true]{background:#edf7f0;color:#238b50;box-shadow:inset 0 0 0 1px #238b50}
+.date-quick button:hover{background:#f0f8f3}
+#globalTimeBar .global-time{width:100%}#globalTimeBar .date-control{flex-wrap:wrap;justify-content:flex-start;gap:12px}
+#globalTimeBar .date-trigger{min-width:270px;flex:0 1 auto}
+.reference-tag{font-size:9px;color:#82918a;font-weight:400;border:1px dashed #a6bdb0;border-radius:3px;padding:1px 4px;white-space:nowrap}
+.reference-flow-row .flow-label{color:#6c8375}
+.flow-plot .reference-band{background:#f1f7f3;border:1px dashed #7eae90;clip-path:none;height:42px}
+.reference-flow-row .metric-inapplicable{font-size:11px;color:#9aa69e}
+.skip-reference-rate{display:flex;flex-direction:column;justify-content:center}
+.skip-reference-rate:hover{background:transparent}
+@media(max-width:750px){.date-quick button{padding:5px 12px}#globalTimeBar .date-control{gap:8px}#globalTimeBar .date-trigger{flex:1 1 250px;min-width:0}.reference-tag{font-size:8px;padding:0 2px}.reference-flow-row .flow-label{flex-wrap:wrap;gap:1px}.reference-flow-row .metric-inapplicable{font-size:9px}.transition-label{white-space:normal}.reference-flow-row .flow-plot .reference-band{height:38px}}
+
+.skip-reference-rate .transition-label{white-space:normal;line-height:1.5}
+
+/* V5.5: show only the selected conversion metric and a solid estimate band. */
+.transition-values.single-rate{display:block}
+.transition-values.single-rate strong{display:inline-block;font-size:16px;color:#238b50;font-weight:600;background:transparent;padding:3px 0}
+.rate-head>div{display:block}
+.flow-plot .band-estimated{background:#61b380;border:0;clip-path:polygon(0 0,100% 0,100% 100%,8% 100%);height:52px}
+.reference-flow-row .flow-label{color:#50617c}
+@media(max-width:750px){.transition-values.single-rate strong{font-size:13px}.flow-plot .band-estimated{height:48px}}
+
+/* V5.9: allow metric-specific rate labels to wrap. */
+.transition-label{white-space:normal;line-height:1.45}
+
+/* V6.0: compact cards for expanded operational metrics. */
+#overviewGrid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+#overviewGrid>.overview-tile:nth-child(n){grid-column:span 1;order:initial;border:1px solid #e4ebe6;border-radius:7px;background:#fff;min-width:0}
+#overviewGrid>.deal-overview:nth-child(n){grid-column:1/-1;order:initial}
+#overviewGrid .overview-pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+#overviewGrid .metric-group .overview-pair,#overviewGrid .metric-rentalEstimated .overview-pair,#overviewGrid .metric-unlogged .overview-pair,#overviewGrid .metric-accept .overview-pair,#overviewGrid .metric-ship .overview-pair{grid-template-columns:minmax(0,1fr)}
+#overviewGrid .deal-overview .overview-pair{grid-template-columns:minmax(300px,2fr) repeat(3,minmax(120px,1fr))}
+@media(max-width:1150px){#overviewGrid{grid-template-columns:repeat(2,minmax(0,1fr))}#overviewGrid .deal-overview .overview-pair{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:750px){#overviewGrid>.overview-tile:nth-child(n){grid-column:span 1;display:block;padding:15px}#overviewGrid>.deal-overview:nth-child(n){grid-column:1/-1}#overviewGrid .metric-group .overview-title,#overviewGrid .metric-rentalEstimated .overview-title{margin-bottom:16px}#overviewGrid .metric-group .overview-pair,#overviewGrid .metric-rentalEstimated .overview-pair{text-align:left}#overviewGrid .metric-group .overview-pair button,#overviewGrid .metric-rentalEstimated .overview-pair button{text-align:left}#overviewGrid .overview-pair{grid-template-columns:1fr;gap:12px}#overviewGrid .deal-overview .overview-pair{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* V6.2: compact grouped metrics and source-aware funnel. */
+#overviewGrid.overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;background:none;border:0;padding:0}
+.dash-group{border:1px solid #e3ebe5;border-radius:6px;padding:14px 16px;background:#fff;min-width:0}
+.dash-deal,.dash-group:last-child{grid-column:1/-1}
+.dash-group-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.dash-group-head h3{font-size:13px;font-weight:600;margin:0;color:#31463b}
+.dash-source,.source-badge{font-style:normal;font-size:10px;font-weight:500;line-height:1.4;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.platform-badge{background:#fff3de;color:#986a25}
+.mini-badge{background:#eaf6ed;color:#29834c}
+.dash-metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:14px 18px}
+.dash-metric{display:block;min-width:0;border:0;background:transparent;padding:0;text-align:left;min-height:0}
+.dash-metric:hover{background:transparent}.dash-metric>span{display:block;font-size:11px;color:#7a8a80}
+.dash-metric strong{display:block;font-variant-numeric:tabular-nums;color:#253b2d;font-size:20px;line-height:1.25;margin-top:5px;white-space:nowrap}
+.dash-metric strong em{font-size:10px;color:#8c9a91;font-style:normal;font-weight:400}
+.deal-grid{grid-template-columns:minmax(240px,1.8fr) repeat(3,minmax(110px,1fr));align-items:end}
+.dash-amount strong{font-size:30px;color:#238b50}
+.funnel-options{display:flex;align-items:center;gap:8px}
+#funnelSettings{position:relative}
+#funnelSettings summary{list-style:none;cursor:pointer;border:1px solid #d7e4da;border-radius:5px;padding:6px 12px;font-size:12px;background:white;min-height:32px;display:flex;align-items:center;gap:12px}
+#funnelSettings summary::-webkit-details-marker{display:none}
+#funnelSettings[open] summary{border-color:#48a56c;color:#238b50}
+.funnel-option-panel{position:absolute;z-index:12;right:0;top:calc(100% + 6px);width:250px;padding:12px;background:#fff;border:1px solid #dfe9e1;border-radius:6px;box-shadow:0 8px 24px #203a2920}
+.funnel-option-title{font-size:12px;font-weight:600;margin:0 4px 8px}
+.funnel-option-panel label{display:flex;align-items:center;gap:8px;padding:7px 4px;cursor:pointer;font-size:12px}
+.funnel-option-panel label:hover{background:#f4f9f5}.funnel-option-panel label input{accent-color:#238b50}
+.funnel-option-panel label small{margin-left:auto;color:#95a399;font-size:10px}
+.funnel-option-foot{border-top:1px solid #edf1ee;margin-top:5px;padding:9px 4px 0;font-size:10px;color:#87958b}
+.compact-flow .flow-data{grid-template-columns:140px 65px 85px}
+.compact-flow-head,.compact-flow-row{grid-template-columns:290px minmax(150px,1fr) 210px}
+.continuous-row .flow-label{gap:5px;flex-wrap:wrap;line-height:1.3}
+.flow-plot .band-platform{background:#d7ae69}.flow-plot .band-mini{background:#50a66d}
+.flow-plot .band-platform,.flow-plot .band-mini{height:44px}
+.continuous-row .transition-label{font-size:10px}
+@media(max-width:1050px){#overviewGrid.overview-grid{grid-template-columns:1fr}.dash-deal,.dash-group:last-child{grid-column:auto}.deal-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.dash-amount{grid-column:span 1}.dash-amount strong{font-size:24px}}
+@media(max-width:750px){.dash-group{padding:12px}.dash-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.deal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-amount{grid-column:1/-1}.dash-amount strong{font-size:27px}.dash-metric strong{font-size:19px}.compact-flow{min-width:510px}.compact-flow-head,.compact-flow-row{grid-template-columns:210px minmax(70px,1fr) 150px;column-gap:8px}.compact-flow .flow-data{grid-template-columns:110px 45px 55px}.source-badge{font-size:9px;padding:1px 4px}.flow-plot .band-platform,.flow-plot .band-mini{height:40px}.funnel-option-panel{width:225px}}
+
+/* V6.3: one source legend for the funnel. */
+.funnel-legend{display:flex;align-items:center;gap:14px;color:#708078;font-size:11px;white-space:nowrap}
+.funnel-legend span{display:flex;align-items:center;gap:6px}
+.funnel-legend i{display:inline-block;width:10px;height:10px;border-radius:2px}
+.funnel-legend .legend-platform{background:#d7ae69}.funnel-legend .legend-mini{background:#50a66d}
+@media(max-width:750px){#funnel .section-head{flex-wrap:wrap;gap:10px}.funnel-options{flex-wrap:wrap}.funnel-legend{gap:10px}}
+
+/* V6.4: make review and merchant acceptance names readable. */
+.continuous-row .flow-label span{white-space:normal;line-height:1.4}
+
+/* V7.0: compact period comparisons on each reporting module. */
+.period-change{display:block;font-size:10px;line-height:1.35;font-weight:400;color:#89978e;white-space:nowrap;margin-top:4px}
+.dash-metric .period-change{color:#89978e;font-size:10px}
+.continuous-row .flow-number{flex-direction:column;justify-content:center;align-items:flex-end;gap:2px}
+.continuous-row .flow-number .period-change{font-size:9px;margin:0;line-height:1.2}
+.transition-values.single-rate .period-change{font-size:9px;white-space:normal;margin-top:0}
+.table-scroll td .period-change{font-size:10px;margin-top:5px;color:#89978e}
+@media(max-width:750px){.continuous-row .flow-number .period-change{font-size:8px;letter-spacing:-.3px}.dash-metric .period-change{font-size:9px}}
+
+/* V7.1: comparison colours indicate direction; signs remain visible. */
+.period-change.change-up,.dash-metric .period-change.change-up,.table-scroll td .period-change.change-up{color:#16834a}
+.period-change.change-down,.dash-metric .period-change.change-down,.table-scroll td .period-change.change-down{color:#c44444}
+.period-change.change-neutral,.dash-metric .period-change.change-neutral,.table-scroll td .period-change.change-neutral{color:#89978e}
+
+/* V7.6: grouped overview cards, following the supplied reference. */
+body{background:#f4f6f5}
+#dashboard.panel{background:transparent;border:0;padding:0}
+#dashboard>.section-head{align-items:center;margin-bottom:12px}
+#overviewGrid.overview-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;background:transparent;border:0;padding:0}
+#overviewGrid .dash-group{grid-column:1/-1;border:1px solid #dfe6e2;border-radius:12px;background:#fff;padding:18px}
+#overviewGrid .dash-group-head{height:22px;display:flex;align-items:center;gap:9px;margin:0 0 15px}
+#overviewGrid .dash-group-head h3{font-size:14px;color:#25352e;display:flex;align-items:center;gap:8px}
+#overviewGrid .dash-group-head h3:before{content:'';width:3px;height:16px;border-radius:2px;background:#22945d}
+#overviewGrid .dash-source{border-radius:20px;font-size:11px}
+#overviewGrid .dash-metric-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;align-items:stretch}
+#overviewGrid .dash-platform .dash-metric-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+#overviewGrid .dash-deal .deal-grid{grid-template-columns:minmax(260px,1.52fr) repeat(3,minmax(0,1fr))}
+#overviewGrid .dash-metric{display:grid;grid-template-rows:20px 35px 18px;align-content:center;justify-items:start;gap:3px;min-width:0;min-height:106px;padding:13px 14px;border:0;border-radius:10px;background:#f3f5f4;text-align:left;transition:background .15s}
+#overviewGrid .dash-metric:hover{background:#eaf0ec}
+#overviewGrid .dash-metric .metric-dotted{font-size:12px;color:#55665e;line-height:19px;max-width:100%;white-space:nowrap}
+#overviewGrid .dash-metric strong{font-size:25px;font-weight:650;color:#232f29;line-height:35px;margin:0;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+#overviewGrid .dash-metric strong em{font-size:11px;color:#84958b;letter-spacing:0}
+#overviewGrid .dash-metric .period-change{font-size:11px;line-height:18px;margin:0;letter-spacing:0}
+#overviewGrid .dash-deal .dash-metric{min-height:130px;grid-template-rows:20px 48px 18px}
+#overviewGrid .dash-deal .dash-metric strong{line-height:48px}
+#overviewGrid .dash-deal .dash-amount{grid-column:auto;background:#228e5c}
+#overviewGrid .dash-deal .dash-amount:hover{background:#197d4e}
+#overviewGrid .dash-deal .dash-amount strong{font-size:clamp(26px,2.7vw,40px);color:#fff;line-height:48px;letter-spacing:-1px}
+#overviewGrid .dash-deal .dash-amount .metric-dotted,#overviewGrid .dash-deal .dash-amount .period-change{color:#fff}
+.funnel-insights{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:start;background:#fdf0e3;border-radius:10px;padding:14px 16px;margin:0 0 18px;color:#24352a}
+.funnel-insights span{display:block;font-size:12px;color:#68776d;margin-bottom:3px}
+.insight-overall strong{font-size:22px;line-height:28px}
+.funnel-insights .insight-stage{flex:0 1 auto;max-width:100%;border:0;padding:0;background:transparent;text-align:left;min-height:0}
+.insight-stage>div{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.insight-stage strong{font-size:16px;line-height:28px}
+.insight-stage b{font-size:14px;color:#b45b13}
+@media(max-width:1250px){#overviewGrid .dash-metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#overviewGrid .dash-platform .dash-metric-grid{grid-template-columns:repeat(5,minmax(0,1fr))}#overviewGrid .dash-deal .deal-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#overviewGrid .dash-deal .dash-amount{grid-column:1/-1;min-height:116px}}
+@media(max-width:900px){#overviewGrid .dash-platform .dash-metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){#overviewGrid .dash-group{padding:14px}#overviewGrid .dash-metric-grid,#overviewGrid .dash-platform .dash-metric-grid,#overviewGrid .dash-deal .deal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#overviewGrid .dash-metric{padding:12px 10px}#overviewGrid .dash-deal .dash-metric:last-child{grid-column:1/-1}#overviewGrid .dash-metric .metric-dotted{font-size:11px}#overviewGrid .dash-metric strong{font-size:23px}.funnel-insights{gap:12px 20px}}
+
+/* V7.7: give both amount metrics room in the transaction overview. */
+#overviewGrid .dash-deal .deal-grid{grid-template-columns:minmax(245px,1.6fr) minmax(185px,1.25fr) repeat(3,minmax(110px,1fr))}
+#overviewGrid .dash-deal .dash-metric:nth-child(2) strong{font-size:clamp(21px,1.9vw,28px)}
+@media(max-width:1250px){#overviewGrid .dash-deal .deal-grid{grid-template-columns:repeat(6,minmax(0,1fr))}#overviewGrid .dash-deal .dash-metric{grid-column:span 2}#overviewGrid .dash-deal .dash-metric:nth-child(-n+2){grid-column:span 3}}
+@media(max-width:600px){#overviewGrid .dash-deal .deal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#overviewGrid .dash-deal .dash-metric{grid-column:auto}#overviewGrid .dash-deal .dash-metric:nth-child(-n+2),#overviewGrid .dash-deal .dash-metric:last-child{grid-column:1/-1}}
+
+/* V7.8: overall conversion summary aligned with the funnel columns. */
+.funnel-overall{display:grid;grid-template-columns:290px minmax(150px,1fr) 210px;align-items:center;column-gap:24px;min-width:740px;border-top:1px solid #dfe7e2;margin-top:12px;padding:16px 0;color:#25352e;font-size:13px}
+.funnel-overall strong{font-weight:600}
+.funnel-overall b{padding-left:18px;font-variant-numeric:tabular-nums}
+.funnel-overall>span{text-align:center;font-size:12px;color:#829187}
+.funnel-overall:focus-visible{outline:2px solid #238b50;outline-offset:2px}
+
+.funnel-overall-value{display:grid;grid-template-columns:140px 150px;align-items:center}
+.funnel-overall>span{grid-column:2;justify-self:center;width:100%;overflow-wrap:anywhere}
+@media(max-width:750px){.funnel-overall{grid-template-columns:210px minmax(70px,1fr) 150px;column-gap:8px;min-width:510px}.funnel-overall-value{grid-template-columns:110px 100px}}
+
+/* Immediate comparison tooltips with a full-width hover target. */
+#metricTooltip{max-width:min(380px,calc(100vw - 16px));white-space:pre-line}
+#overviewGrid .dash-metric .period-change{justify-self:stretch;min-height:24px;padding:3px 0;cursor:help;position:relative;z-index:1;text-decoration:underline dotted;text-underline-offset:4px;text-decoration-color:currentColor}
+#overviewGrid .dash-metric .period-change:focus-visible{outline:2px solid #238b50;outline-offset:2px;border-radius:3px}
+
+/* Ring comparisons display values only, without explanatory tooltips. */
+#overviewGrid .dash-metric .period-change{cursor:default;text-decoration:none}
+
+/* Configurable dashboard indicators */
+#overviewGrid.dashboard-filtered .dash-metric-grid,#overviewGrid.dashboard-filtered .dash-platform .dash-metric-grid,#overviewGrid.dashboard-filtered .dash-deal .deal-grid{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+#overviewGrid.dashboard-filtered .dash-deal .dash-metric:nth-child(n){grid-column:auto}
+#overviewGrid.dashboard-filtered .dash-deal .dash-amount{min-width:0}
+.config-toolbar{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;border-bottom:1px solid #e8eeea;color:#526459}
+.config-toolbar>div{display:flex;gap:8px}.config-text{border:0;padding:3px 5px;min-height:26px;color:#238b50;background:transparent;font-size:12px}
+.config-groups{display:grid;gap:18px;padding:18px 0 4px}.config-group-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;color:#253b2d}.config-group-title strong{font-size:14px}
+.config-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 14px}.config-options label,.config-footer label{display:flex;align-items:center;gap:8px;color:#46584e;font-size:13px;cursor:pointer}.config-options input,.config-footer input{accent-color:#238b50;width:16px;height:16px;margin:0;flex:none}
+.config-footer{display:flex;align-items:center;justify-content:space-between;gap:14px}.config-footer>div{display:flex;gap:8px}
+@media(max-width:600px){.config-options{grid-template-columns:repeat(2,minmax(0,1fr))}.config-footer{flex-wrap:wrap}}
+
+#closeDialog{display:grid;place-items:center;width:34px;height:34px;min-height:34px;padding:0;border:0;background:transparent;color:#87958c;font-size:24px;line-height:1;font-weight:400}
+#closeDialog:hover{background:#f0f5f1;color:#238b50}
+
+.prototype-pagination{--pp-green:#54c65e;display:flex;align-items:center;justify-content:flex-end;gap:20px;flex-wrap:wrap;color:#737d8b;font-size:12px;line-height:1.4;padding-top:20px}.prototype-pagination button,.prototype-pagination input,.prototype-pagination select{font:inherit;box-sizing:border-box;border-radius:2px;height:30px;min-height:30px;box-shadow:none;background:#fff;color:#737d8b;border:1px solid #dce3e1;margin:0}.prototype-pagination .pp-size{width:100px;padding:3px 10px;border-color:var(--pp-green);cursor:pointer}.prototype-pagination .pp-pages{display:flex;align-items:center;gap:8px}.prototype-pagination .pp-page,.prototype-pagination .pp-arrow{display:grid;place-items:center;min-width:30px;padding:3px 8px;border:0}.prototype-pagination .pp-arrow{background:#f5f7f9;font-size:21px;font-weight:300}.prototype-pagination .pp-page.is-current{background:var(--pp-green);color:#fff;font-weight:550}.prototype-pagination .pp-page:not(.is-current):hover{background:#edf9ee;color:#38a542}.prototype-pagination .pp-arrow:hover:not(:disabled){background:#edf9ee;color:#38a542}.prototype-pagination button:disabled,.prototype-pagination input:disabled{color:#c5cbd3;background:#f6f8fa;opacity:1;cursor:not-allowed}.prototype-pagination .pp-page.is-current:disabled{background:#e9edf0;color:#a2acb6}.prototype-pagination .pp-jump{display:flex;align-items:center;gap:9px}.prototype-pagination .pp-input{width:49px;text-align:center;padding:4px}.prototype-pagination .pp-jump button{padding:3px 10px}.prototype-pagination .pp-jump button:hover:not(:disabled){background:#f2faf3;border-color:#94d99a}.prototype-pagination .pp-input::placeholder{color:#a2aba9}.prototype-pagination .pp-input[aria-invalid=true]{border-color:#d59358}.prototype-pagination .pp-ellipsis{color:#b0b8c2;padding:0 2px}.prototype-pagination :focus-visible{outline:2px solid #83d68c;outline-offset:2px}.pp-error{color:#b57b44;font-size:11px;line-height:1.5;text-align:right;margin:8px 0 0}.pp-error:empty{display:none}@media(max-width:650px){.prototype-pagination{justify-content:flex-start;gap:12px 16px}.prototype-pagination .pp-jump{margin-left:0}.pp-error{text-align:left}}
+</style></head><body>
+<aside class="sidebar"><div class="brand"><b>租</b>闪租运营</div><div class="side-label">运营分析</div><nav aria-label="模块导航"><a class="active" href="#dashboard">数据看板</a><a href="#funnel">经营漏斗</a><a href="#products">商品行为列表</a></nav><small>闪租数据中心</small></aside>
+<div class="main"><header class="topbar"><span>数据中心 / 美团渠道 / 租赁分析</span><span class="pill">示例数据</span></header><main>
+<div class="page-head"><div><h1>美团租赁数据中心</h1></div><div class="stamp">更新至 2026-10-23 23:59</div></div>
+<div id="globalTimeBar" class="panel filters time-filter-bar" role="region" aria-label="全局时间筛选"><div class="field global-time"><span>统计时间</span><div id="globalDate"></div></div></div>
+<section class="panel" id="dashboard"><div class="section-head"><h2>数据看板</h2><div class="actions"><button type="button" id="configureDashboard">指标配置</button><button type="button" id="exportDashboard">导出数据</button></div></div><div id="overviewGrid" class="overview-grid"></div></section>
+<section class="panel flow-panel" id="funnel"><div class="section-head"><h2>经营漏斗</h2><div class="funnel-options"><div class="funnel-legend" aria-label="数据来源图例"><span><i class="legend-platform"></i>美团侧</span><span><i class="legend-mini"></i>小程序侧</span></div><details id="funnelSettings"><summary>选择漏斗节点 <span aria-hidden="true">⌄</span></summary><div id="funnelNodeOptions" class="funnel-option-panel"></div></details></div></div><div id="flowContent"></div></section>
+<section class="panel" id="products"><div class="section-head"><div><h2>租赁商品数据</h2></div><div class="actions"><button id="exportProducts">导出</button></div></div><form id="productFilters" class="product-filter-form"><div class="global-filter-grid rental-product-filter-grid"><label class="field">商品类目<select id="category"><option value="all">全部类目</option><option>手机</option><option>摄影器材</option><option>游戏设备</option></select></label><label class="field">商品名称<input type="search" id="search" placeholder="搜索商品名称" autocomplete="off"></label><label class="field id-search">商品ID<textarea id="productIds" rows="1" placeholder="多个ID用逗号、空格或换行分隔，如 10021,10022" aria-describedby="idHint"></textarea></label><div class="actions"><button class="primary" type="submit">查询</button><button type="button" id="resetFilters">重置</button></div></div><div class="filter-status-row"><span id="filterStatus" role="status"></span></div><div id="idHint" class="filter-id-hint" aria-live="polite"></div></form><div id="tableWrap" class="table-scroll"></div><div id="productPagination"></div></section>
+</main></div>
+<dialog id="dialog" aria-labelledby="dialogTitle"><div class="dialog-head"><h2 id="dialogTitle"></h2><button id="closeDialog" aria-label="关闭弹窗">×</button></div><div class="dialog-body" id="dialogBody"></div><div class="dialog-footer" id="dialogFooter"></div></dialog><div id="toast" role="status" aria-live="polite"></div>
+<div id="metricTooltip" role="tooltip" hidden></div><script>class RentalDatePicker {
+ constructor(root,{label,onChange}){
+  this.root=root;this.label=label;this.onChange=onChange;this.unit='day';this.value={start:'2026-10-17',end:'2026-10-23',preset:'近7天'};this.opened=false;this.view=new Date(Date.UTC(2026,9,1));this.draft={...this.value};this.picking=false;this.render();
+ }
+ date(d){return d.toISOString().slice(0,10)}
+ parse(s){return new Date(s+'T00:00:00Z')}
+ shift(s,n){const d=this.parse(s);d.setUTCDate(d.getUTCDate()+n);return this.date(d)}
+ endMonth(s){const d=this.parse(s);return this.date(new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,0)))}
+ emit(){this.onChange({...this.value,unit:this.unit})}
+ setDefault(emit=true){this.unit='day';this.value={start:'2026-10-17',end:'2026-10-23',preset:'近7天'};this.opened=false;this.render();if(emit)this.emit()}
+ preset(name){let start,end='2026-10-23';if(this.unit==='day'){if(name==='昨天')start=end;else start=this.shift(end,name==='近7天'?-6:-29)}else{if(name==='本月')start='2026-10-01';if(name==='上月'){start='2026-09-01';end='2026-09-30'}if(name==='近3月')start='2026-08-01'}this.value={start,end,preset:name};this.opened=false;this.render();this.emit()}
+ open(){document.querySelectorAll('.date-picker-root').forEach(el=>{if(el!==this.root&&el.picker)el.picker.close()});this.opened=true;this.draft={...this.value};this.picking=false;const d=this.parse(this.value.start);this.view=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),1));this.render();this.root.querySelector('.date-shortcuts button')?.focus()}
+ close(){this.opened=false;this.render()}
+ monthHtml(offset){const d=new Date(Date.UTC(this.view.getUTCFullYear(),this.view.getUTCMonth()+offset,1)),y=d.getUTCFullYear(),m=d.getUTCMonth(),first=(d.getUTCDay()+6)%7;let cells='';for(let i=0;i<42;i++){const cell=new Date(Date.UTC(y,m,1-first+i)),date=this.date(cell),other=cell.getUTCMonth()!==m,disabled=date>'2026-10-23',selected=date===this.draft.start||date===this.draft.end,between=date>this.draft.start&&date<this.draft.end;cells+=`<button type="button" data-date="${date}" aria-label="${date}" aria-pressed="${selected}" class="calendar-day ${other?'other':''} ${selected?'selected':''} ${between?'between':''}" ${disabled?'disabled':''}>${cell.getUTCDate()}</button>`}return `<div class="calendar-month"><div class="month-head">${offset===0?'<span><button type="button" data-nav="-12" aria-label="上一年">«</button><button type="button" data-nav="-1" aria-label="上一月">‹</button></span>':'<span></span>'}<strong>${y}年 ${m+1}月</strong>${offset===1?'<span><button type="button" data-nav="1" aria-label="下一月">›</button><button type="button" data-nav="12" aria-label="下一年">»</button></span>':'<span></span>'}</div><div class="calendar-week">${['一','二','三','四','五','六','日'].map(x=>`<span>${x}</span>`).join('')}</div><div class="calendar-grid">${cells}</div></div>`}
+ monthsHtml(){const year=this.view.getUTCFullYear();return `<div class="calendar-month month-select"><div class="month-head"><button type="button" data-nav="-12" aria-label="上一年">«</button><strong>${year}年</strong><button type="button" data-nav="12" aria-label="下一年">»</button></div><div class="month-grid">${Array.from({length:12},(_,i)=>{let s=`${year}-${String(i+1).padStart(2,'0')}-01`,sel=s.slice(0,7)===this.draft.start.slice(0,7)||s.slice(0,7)===this.draft.end.slice(0,7);return `<button type="button" data-month="${s}" class="${sel?'selected':''} ${s>this.draft.start&&s<this.draft.end?'between':''}" ${s>'2026-10-23'?'disabled':''}>${i+1}月</button>`}).join('')}</div><p class="calendar-hint">选择起始月和结束月，当月统计至昨日。</p></div>`}
+ select(date,month=false){if(!this.picking){this.draft.start=date;this.draft.end=month?this.endMonth(date):date;this.picking=true}else{const first=this.draft.start;this.draft.start=date<first?date:first;this.draft.end=month?this.endMonth(date<first?first:date):(date<first?first:date);this.picking=false}if(this.draft.end>'2026-10-23')this.draft.end='2026-10-23';this.draft.preset='自定义';this.render()}
+ render(){this.root.classList.add('date-picker-root');this.root.picker=this;const text=`${this.value.start} – ${this.value.end}`;this.root.innerHTML=`<div class="date-control"><div class="date-unit" aria-label="${this.label}粒度"><button type="button" data-unit="day" aria-pressed="${this.unit==='day'}">日</button><button type="button" data-unit="month" aria-pressed="${this.unit==='month'}">月</button></div><div class="date-quick" aria-label="常用时间">${(this.unit==='day'?[['昨天','昨日'],['近7天','7天'],['近30天','30天']]:[['本月','本月'],['上月','上月'],['近3月','近3月']]).map(([key,label])=>`<button type="button" data-quick="${key}" aria-pressed="${this.value.preset===key}">${label}</button>`).join('')}</div><button type="button" class="date-trigger" aria-label="${this.label}" aria-haspopup="dialog" aria-expanded="${this.opened}"><span>${text}</span><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor"/><path d="M6 2v4M14 2v4M3 8h14M6 11h3M11 11h3M6 14h3" stroke="currentColor"/></svg></button></div>${this.opened?`<div class="date-popup" role="dialog" aria-label="${this.label}选择器"><div class="date-shortcuts">${(this.unit==='day'?['昨天','近7天','近30天','自定义']:['本月','上月','近3月','自定义']).map(x=>`<button type="button" data-preset="${x}" class="${this.draft.preset===x?'active':''}">${x}</button>`).join('')}</div><div class="calendar-content"><div class="calendar-pair">${this.unit==='day'?this.monthHtml(0)+this.monthHtml(1):this.monthsHtml()}</div><div class="calendar-footer"><span class="calendar-hint">${this.picking?'请选择结束'+(this.unit==='day'?'日期':'月份'):this.draft.start+' 至 '+this.draft.end}</span><button type="button" data-cancel>取消</button><button type="button" data-confirm class="date-confirm">确定</button></div></div></div>`:''}`;
+ this.root.querySelector('.date-trigger').onclick=()=>this.opened?this.close():this.open();
+ this.root.querySelectorAll('[data-quick]').forEach(b=>b.onclick=()=>this.preset(b.dataset.quick));
+ this.root.querySelectorAll('[data-unit]').forEach(b=>b.onclick=()=>{if(this.unit!==b.dataset.unit){this.unit=b.dataset.unit;this.value=this.unit==='month'?{start:'2026-10-01',end:'2026-10-23',preset:'本月'}:{start:'2026-10-17',end:'2026-10-23',preset:'近7天'};this.opened=false;this.render();this.emit()}});
+ this.root.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{if(b.dataset.preset==='自定义'){this.draft.preset='自定义';this.picking=false;this.render()}else this.preset(b.dataset.preset)});
+ this.root.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>{this.view=new Date(Date.UTC(this.view.getUTCFullYear(),this.view.getUTCMonth()+Number(b.dataset.nav),1));this.render()});
+ this.root.querySelectorAll('[data-date]').forEach(b=>b.onclick=()=>this.select(b.dataset.date));this.root.querySelectorAll('[data-month]').forEach(b=>b.onclick=()=>this.select(b.dataset.month,true));
+ this.root.querySelector('[data-cancel]')?.addEventListener('click',()=>this.close());this.root.querySelector('[data-confirm]')?.addEventListener('click',()=>{this.value={...this.draft};this.opened=false;this.render();this.emit()});
+ }
+}
+document.addEventListener('click',e=>document.querySelectorAll('.date-picker-root').forEach(el=>{if(el.picker?.opened&&!e.composedPath().includes(el))el.picker.close()}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.date-picker-root').forEach(el=>{if(el.picker?.opened){el.picker.close();el.querySelector('.date-trigger').focus()}})});
+
+/* Shared pagination component. Include pagination.css alongside this file. */
+class PrototypePagination {
+ static nextId=0;
+ constructor(root,{total=0,page=1,pageSize=10,pageSizes=[10,20,50,100],onChange=()=>{}}={}){
+  this.root=root;this.sizes=pageSizes;this.onChange=onChange;this.id='prototype-page-'+(++PrototypePagination.nextId);this.setState({total,page,pageSize});
+ }
+ setState({total=this.total,page=this.page,pageSize=this.pageSize}={}){
+  this.total=Math.max(0,Math.floor(Number(total)||0));this.pageSize=this.sizes.includes(Number(pageSize))?Number(pageSize):this.sizes[0];this.pages=Math.max(1,Math.ceil(this.total/this.pageSize));this.page=Math.max(1,Math.min(this.pages,Math.floor(Number(page)||1)));this.render();
+ }
+ move(page,pageSize=this.pageSize){this.setState({page,pageSize});this.onChange({page:this.page,pageSize:this.pageSize})}
+ pageItems(){if(this.pages<=7)return Array.from({length:this.pages},(_,i)=>i+1);const selected=new Set([1,this.pages,this.page-1,this.page,this.page+1]);if(this.page<=3)[2,3,4,5].forEach(n=>selected.add(n));if(this.page>=this.pages-2)[this.pages-4,this.pages-3,this.pages-2,this.pages-1].forEach(n=>selected.add(n));const values=[...selected].filter(n=>n>0&&n<=this.pages).sort((a,b)=>a-b),result=[];values.forEach((n,i)=>{if(i&&n-values[i-1]>1)result.push('…');result.push(n)});return result}
+ render(){
+  const empty=this.total===0;
+  this.root.innerHTML=`<nav class="prototype-pagination" aria-label="表格分页"><span class="pp-total">共 ${this.total} 条</span><select class="pp-size" aria-label="每页条数">${this.sizes.map(n=>`<option value="${n}" ${n===this.pageSize?'selected':''}>${n}条/页</option>`).join('')}</select><div class="pp-pages"><button type="button" class="pp-arrow" data-prev aria-label="上一页" ${this.page===1||empty?'disabled':''}>‹</button>${this.pageItems().map(n=>typeof n==='number'?`<button type="button" class="pp-page ${n===this.page?'is-current':''}" data-page="${n}" aria-label="第${n}页" ${n===this.page?'aria-current="page"':''} ${empty?'disabled':''}>${n}</button>`:'<span class="pp-ellipsis" aria-hidden="true">…</span>').join('')}<button type="button" class="pp-arrow" data-next aria-label="下一页" ${this.page===this.pages||empty?'disabled':''}>›</button></div><div class="pp-jump"><label for="${this.id}">跳至</label><input id="${this.id}" class="pp-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="页码" aria-label="跳转页码" aria-describedby="${this.id}-error" ${empty?'disabled':''}><span>页</span><button type="button" data-jump ${empty?'disabled':''}>跳转</button></div></nav><p id="${this.id}-error" class="pp-error" role="status" aria-live="polite"></p>`;
+  this.root.querySelector('.pp-size').onchange=e=>this.move(1,Number(e.target.value));
+  this.root.querySelector('[data-prev]').onclick=()=>this.move(this.page-1);
+  this.root.querySelector('[data-next]').onclick=()=>this.move(this.page+1);
+  this.root.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>this.move(Number(b.dataset.page)));
+  const input=this.root.querySelector('.pp-input');const jump=()=>{const value=input.value.trim();if(!/^\d+$/.test(value)||Number(value)<1||Number(value)>this.pages){input.setAttribute('aria-invalid','true');this.root.querySelector('.pp-error').textContent=`请输入 1–${this.pages} 的整数页码`;input.focus();return}this.move(Number(value))};
+  this.root.querySelector('[data-jump]').onclick=jump;input.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();jump()}};input.oninput=()=>{input.removeAttribute('aria-invalid');this.root.querySelector('.pp-error').textContent=''};
+ }
+}
+
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>Number(n).toLocaleString('zh-CN'), pct=(a,b)=>b?`${(a/b*100).toFixed(2)}%`:'—';
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const DAY=86400000, CUT=Date.parse('2026-10-23T23:59:59+08:00');
+const stamp=d=>Date.parse(`${d}T00:00:00+08:00`);
+const dateLabel=t=>new Date(t+8*3600000).toISOString().slice(0,10);
+const productDefs=[['10021','iPhone 16 Pro','手机'],['10022','iPhone 15','手机'],['10024','华为 Mate 60 Pro','手机'],['10035','索尼 A7M4 相机','摄影器材'],['10036','佳能 R6 Mark II','摄影器材'],['10038','大疆 Osmo Pocket 3','摄影器材'],['10046','任天堂 Switch OLED','游戏设备'],['10047','PlayStation 5','游戏设备']].map(([id,name,cat])=>({id,name,cat}));
+const stores={sh:'上海静安店',hz:'杭州滨江店',sz:'深圳南山店'};
+const placements={recommend:'首页推荐',category:'分类列表',search:'搜索结果'};
+function hash(x){let v=(x*1664525+1013904223)>>>0;v^=v>>>15;v=Math.imul(v,2246822519);return(v>>>0)/4294967296}
+const journeys=[];
+for(let day=1;day<=23;day++)for(let i=0;i<180;i++){
+ const k=day*180+i,entry=stamp(`2026-10-${String(day).padStart(2,'0')}`)+(9*3600+i*180)*1000;
+ const p=productDefs[Math.floor(hash(k+5)*productDefs.length)],store=Object.keys(stores)[i%3],user='U-'+String(Math.floor(hash(k+8)*1100)).padStart(4,'0');
+ const r=hash(k+20),thresholds=[1,.80,.46,.43,.34,.32,.27,.25,.23,.20];
+ let depth=0;thresholds.forEach((v,idx)=>{if(r<v)depth=idx});
+ const login=hash(k+30)>.4,source=hash(k+1)>.07?'rental':'unknown',placement=Object.keys(placements)[Math.floor(hash(k+40)*3)],direct=hash(k+50)<.22;
+ const times=Array.from({length:10},(_,s)=>entry+s*75*1000);
+ times[8]+=Math.floor(hash(k+60)*3)*DAY;times[9]=Math.max(times[8]+Math.floor(hash(k+70)*3)*DAY+45000,times[7]+3*3600000);
+ const raw=Array.from({length:10},(_,s)=>s<7?1+Math.floor(hash(k+s+90)*3):1);
+ raw[0]=1;raw[3]+=!login&&depth>=4?1:0;
+ const success=!login&&depth>=3&&(depth>=4||hash(k+100)>.55),returned=success&&(depth>=4||hash(k+101)>.15);
+ journeys.push({k,id:'J-'+String(k).padStart(5,'0'),uid:user,p,store,source,entry,login,placement,direct,depth,times,raw,success,returned});
+}
+const baseScope={source:'rental',store:'all',category:'all',search:'',login:'all',placement:'all'};
+let applied={...baseScope,start:'2026-10-17',end:'2026-10-23',ids:[]};
+let productApplied={...applied,ids:[]};
+let areaMetric=0;
+const funnelNodeOrder=['exposure','shop','miniTotal','rental','order','verify','review','accept','deal'];
+let selectedFunnelNodes=new Set(['exposure','shop','miniTotal','rental','order','verify','deal','review','accept']);
+const funnelNodeNames={exposure:'店铺曝光',shop:'店铺访问',miniTotal:'小程序总访问',rental:'已登录访问',order:'租赁下单',verify:'认证通过',deal:'首期支付成功',review:'平台审核通过',accept:'商家接单'};
+let sortKey='browseUv',sortDir=-1,page=1,pageSize=10;
+let hidden=new Set(),lastFlow=[],lastTable=[],globalPicker,productPager,lastPrevFlow=null,lastPrevSummary=null;
+const COLS=[['browseUv','商品访问人数'],['browseRaw','商品浏览量'],['ctr','商品曝光-访问点击率'],['orderUv','下单人数'],['orderRaw','下单量'],['dealUv','成交买家数'],['dealRaw','成交订单数'],['amount','成交金额（预估）'],['dealRate','商品访问-成交转化率']];
+function selectedProduct(p,range=applied){return (range.category==='all'||p.cat===range.category)&&(!range.search||p.name.toLowerCase().includes(range.search.toLowerCase()))&&(!range.ids.length||range.ids.includes(p.id))}
+function productScoped(){return applied.category!=='all'||!!applied.search||applied.ids.length>0}
+function matching(j,range=applied){return j.source==='rental'&&selectedProduct(j.p,range)}
+function inRange(t,range=applied){return t>=stamp(range.start)&&t<stamp(range.end)+DAY&&t<=CUT}
+function unique(arr){return new Set(arr.map(j=>j.uid)).size}
+function previousPeriod(range){
+ const start=stamp(range.start),days=Math.round((stamp(range.end)-start)/DAY)+1;
+ const previous={...range,start:dateLabel(start-days*DAY),end:dateLabel(start-DAY)};
+ return {range:previous,available:stamp(previous.start)>=stamp('2026-10-01')};
+}
+function rateNumber(value){if(typeof value==='number')return value;if(typeof value==='string'&&value.endsWith('%'))return Number.parseFloat(value)/100;return null}
+function periodChange(value,prior,isRate=false){
+ if(value==null||prior==null||!Number.isFinite(value)||!Number.isFinite(prior))return '—';
+ if(!isRate&&prior===0)return '—';
+ const raw=isRate?(value-prior)*100:(value-prior)/prior*100;
+ const rounded=Number(raw.toFixed(2)),signed=rounded>0?'+':'';
+ return `${signed}${rounded.toFixed(2)}${isRate?'个百分点':'%'}`;
+}
+function compareText(value,prior,isRate=false){return `环比 ${periodChange(value,prior,isRate)}`}
+function compareMarkup(value,prior,isRate=false,range=applied){
+ const change=periodChange(value,prior,isRate),direction=change.startsWith('+')?'change-up':change.startsWith('-')?'change-down':'change-neutral';
+ return `<span class="period-change ${direction}">${compareText(value,prior,isRate)}</span>`;
+}
+function mainComparison(){
+ const prev=previousPeriod(applied);if(!prev.available)return {flow:null,summary:null};
+ const saved=applied;try{applied=prev.range;return {flow:makeFlow(),summary:dealSummary()}}finally{applied=saved}
+}
+function previousMetric(id,i){return lastPrevFlow?.find(s=>s.id===id)?.values[i]??null}
+function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),2600)}
+function showDialog(title,body,footer=''){const d=$('#dialog');$('#dialogTitle').textContent=title;$('#dialogBody').innerHTML=body;$('#dialogFooter').innerHTML=footer||'<button class="primary" id="dialogDone">知道了</button>';if(!d.open)d.showModal();$('#dialogDone')?.addEventListener('click',()=>d.close())}
+$('#closeDialog').onclick=()=>$('#dialog').close();$('#dialog').addEventListener('click',e=>{if(e.target===$('#dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});
+function depositPassed(j){return j.depth>=7&&hash(j.k+1200)<.90}
+function verificationPassed(j){return depositPassed(j)&&hash(j.k+1210)<.90}
+function platformPassed(j){return verificationPassed(j)&&hash(j.k+1250)<.83}
+function merchantAccepted(j){return platformPassed(j)&&hash(j.k+1220)<.85}
+function stageRecords(stage,range=applied,pid=null){return journeys.filter(j=>matching(j,range)&&(!pid||j.p.id===pid)&&j.depth>=stage&&(stage!==9||merchantAccepted(j))&&inRange(j.times[stage],range))}
+function loggedInRange(j,range=applied){return j.login?inRange(j.entry,range):j.success&&inRange(j.times[3],range)}
+function rentalRecords(range=applied,pid=null){return journeys.filter(j=>matching(j,range)&&(!pid||j.p.id===pid)&&inRange(j.entry,range)&&loggedInRange(j,range))}
+function rentalViews(records){return records.reduce((n,j)=>n+(j.depth>=1?j.raw[1]:1),0)}
+function makeFlow(){
+ const platformJs=journeys.filter(j=>inRange(j.entry));const visitIds=new Set(),exposeIds=new Set();
+ platformJs.forEach(j=>{visitIds.add(j.uid);visitIds.add('V-'+Math.floor(hash(j.k+245)*4000));for(let i=0;i<4;i++)exposeIds.add('E-'+Math.floor(hash(j.k+i+250)*13000))});visitIds.forEach(id=>exposeIds.add(id));
+ const groupVisitIds=new Set(platformJs.map(j=>'G-'+Math.floor(hash(j.k+940)*1500)));
+ const groupUv=groupVisitIds.size;
+ const visits=journeys.filter(j=>matching(j)&&inRange(j.entry));
+ const rental=visits.filter(j=>loggedInRange(j)),loggedIds=new Set(rental.map(j=>j.uid)),unloggedIds=new Set(visits.filter(j=>!loggedIds.has(j.uid)).map(j=>j.uid)),orders=stageRecords(7),deals=stageRecords(9);
+ const views=j=>j.depth>=1?j.raw[1]:1;
+ const loggedViews=j=>j.login?views(j):(loggedInRange(j)?1:0);
+ const totalPv=visits.reduce((n,j)=>n+views(j),0),rentPv=rental.reduce((n,j)=>n+loggedViews(j),0);
+ const shopUv=visitIds.size,shopPv=platformJs.length*4+Math.floor(platformJs.length*.35),rentUv=unique(rental);
+ const candidates=journeys.filter(j=>matching(j)&&j.depth>=7);
+ const activity=(offset,threshold,days)=>candidates.filter(j=>hash(j.k+offset)<threshold&&inRange(j.times[7]+Math.floor(hash(j.k+offset+1)*days)*DAY));
+ const verify=candidates.filter(j=>verificationPassed(j)&&inRange(j.times[7]+20*60000));
+ const reviewedAll=candidates.filter(platformPassed),reviewTime=j=>j.times[7]+3600000,reviewed=reviewedAll.filter(j=>inRange(reviewTime(j)));
+ const accepted=reviewedAll.filter(j=>merchantAccepted(j)&&inRange(reviewTime(j)+3600000)),shipped=activity(1230,.52,3),refunded=activity(1240,.18,4);
+
+ const result=[
+ {id:'exposure',level:'01',name:'店铺曝光',source:'美团平台',labels:['店铺曝光人数','曝光量'],values:[exposeIds.size,platformJs.length*17],units:['人','次'],note:'店铺在美团搜索、推荐等位置的曝光。'},
+ {id:'shop',level:'02',name:'店铺访问与浏览',source:'美团平台',labels:['店铺访问人数','店铺浏览量'],values:[shopUv,shopPv],units:['人','次'],note:'访问为周期去重人数；浏览量为店铺页面浏览量。'},
+ {id:'rental',level:'04',name:'已登录访问',source:'小程序访问事件',labels:['已登录访问人数','已登录访问量'],values:[rentUv,rentPv],units:['人','次'],note:'统计期内已关联登录用户ID的去重访客人数；访问量按访问时已登录的行为统计。'},
+ {id:'group',level:'',name:'团购访问',source:'美团后台团购报表',labels:['团购访问人数'],values:[groupUv],units:['人'],note:'统计期内团购商品的访问用户数，按用户去重。'},
+ {id:'order',level:'04',name:'下单',source:'租赁订单',labels:['下单人数','下单量'],values:[unique(orders),orders.length],units:['人','单'],note:'成功创建待付款订单；人数按用户去重，下单量按订单去重。'},
+ {id:'deal',level:'05',name:'成交',source:'租赁订单',labels:['成交买家数','成交订单数'],values:[unique(deals),deals.length],units:['人','单'],note:'按首期支付成功时间统计，成交买家按用户去重，成交订单按订单ID去重。'},
+ {id:'miniTotal',level:'03',name:'小程序总访问',source:'小程序访问事件',labels:['小程序总访问人数','小程序总访问量'],values:[unique(visits),totalPv],units:['人','次'],note:'统计期内来自租赁入口的小程序访问，包含已登录和未登录；人数按匿名访客与账号关联后去重。'},
+ {id:'unlogged',level:'',name:'未登录访问',source:'小程序访问事件',labels:['未登录访问人数','未登录访问量'],values:[unloggedIds.size,totalPv-rentPv],units:['人','次'],note:'统计期内未关联登录用户ID的访客数，按访客ID去重；访客登录并关联用户ID后计入已登录访问人数。访问量按访问时未登录的行为统计。'},
+ {id:'verify',level:'',name:'认证通过',source:'认证服务结果',labels:['认证通过人数','认证通过量'],values:[unique(verify),verify.length],units:['人','单'],note:'按认证通过时间统计，人数按用户去重，量按认证通过的订单ID去重。'},
+ {id:'review',level:'',name:'平台审核通过',source:'平台审核记录',labels:['平台审核通过人数','平台审核通过订单数'],values:[unique(reviewed),reviewed.length],units:['人','单'],note:'统计期内平台审核通过的去重用户数和订单数；平台审核发生在商家接单和支付之前。'},
+ {id:'accept',level:'',name:'商家接单',source:'租赁订单状态记录',labels:['商家接单人数','商家接单量'],values:[unique(accepted),accepted.length],units:['人','单'],note:'统计期内商家评审通过并接单的订单数及对应用户数，分别按订单ID和用户去重。'},
+ {id:'ship',level:'',name:'发货',source:'物流发货记录',labels:['发货量'],values:[shipped.length],units:['单'],note:'统计期内至少发生一次发货的订单数，按订单ID去重。'},
+ {id:'refund',level:'',name:'退款',source:'退款记录',labels:['退款量','退款金额'],values:[refunded.length,refunded.reduce((n,j)=>n+orderRentalCents(j),0)/100],units:['单','元'],note:'退款量按统计期内退款成功的订单ID去重；退款金额按退款成功时间累计实际退款金额。'},
+ ];
+ if(productScoped())result.filter(s=>['exposure','shop','group'].includes(s.id)).forEach(s=>{s.values=[null,null];s.unavailable='美团店铺数据暂无商品维度，当前商品筛选下不展示该指标。'});
+ return result;
+}
+function metricValue(s,i){return !s.labels[i]?'':s.values[i]==null?'—':s.units[i]==='元'?'¥'+money(s.values[i]):fmt(s.values[i])}
+function dealSummary(){const deals=stageRecords(9),rental=rentalRecords();return {firstPayment:deals.reduce((sum,j)=>sum+orderRentalCents(j),0)/100,amount:deals.reduce((sum,j)=>sum+estimatedRentalCents(j),0)/100,rate:pct(unique(deals),unique(rental))}}
+function metricDetails(id){const s=lastFlow.find(x=>x.id===id),extra=id==='deal'?dealSummary():null;showDialog(s.name+' · 指标口径',`<div class="metric-detail-pair">${s.labels.map((l,i)=>`<div><small>${l}</small><strong>${metricValue(s,i)} <em>${s.units[i]}</em></strong></div>`).join('')}${extra?`<div><small>成交金额（预估）</small><strong>¥${money(extra.amount)}</strong></div><div><small>首期支付金额</small><strong>¥${money(extra.firstPayment)}</strong></div><div><small>成交转化率（实测）</small><strong>${extra.rate}</strong></div>`:''}</div><p>${s.unavailable||s.note}</p><p>统计时间：${applied.start} 至 ${applied.end}；来源：${s.source}。</p>${extra?'<p>成交金额（预估）为统计期内成交订单在成交时约定的租金总额，含未来未收租金，不含押金；来源：支付成功流水。按首期支付成功时间汇总所选时间内的首期实付租金，支付流水去重；含主动支付及代扣，不含押金、后续期款，不扣减退款。成交转化率=成交买家数÷已登录访问人数×100%。</p>':''}`)}
+function funnelStages(){return funnelNodeOrder.filter(id=>selectedFunnelNodes.has(id)).map(id=>lastFlow.find(s=>s.id===id)).filter(Boolean)}
+function flowRates(){const stages=funnelStages();return stages.slice(1).map((to,i)=>({from:stages[i],to,name:`${funnelNodeNames[stages[i].id]}至${funnelNodeNames[to.id]}比例`}))}
+function flowMetricLabel(s,i=areaMetric){return s.id==='rental'?(i===0?'已登录访问人数':'已登录访问量'):s.labels[i]}
+function flowRateTip(r){return `当前所选时间内，${flowMetricLabel(r.to)} ÷ ${flowMetricLabel(r.from)} × 100%。`}
+function stageRate(from,to,i){return from.values[i]!=null&&to.values[i]!=null&&from.values[i]>0&&to.values[i]>=0?pct(to.values[i],from.values[i]):'—'}
+function rateDetails(id){const r=flowRates().find(r=>r.to.id===id);showDialog(r.name+' · 计算口径',`<p>统计时间：${applied.start} 至 ${applied.end}</p>${[areaMetric].map(i=>`<div class="rate-formula"><small>${i===0?'人数':'量'}转化率</small><strong>${stageRate(r.from,r.to,i)}</strong><p>${flowMetricLabel(r.to,i)} ÷ ${flowMetricLabel(r.from,i)} × 100%<br>${metricValue(r.to,i)} ÷ ${metricValue(r.from,i)} × 100%</p></div>`).join('')}<p class="subtitle">${flowRateTip(r)}</p>`)}
+function funnelInsights(){
+ const stages=funnelStages(),first=stages[0],last=stages[stages.length-1];
+ if(!first||!last)return '';
+ const ranked=flowRates().filter(r=>r.from.values[areaMetric]>0&&r.to.values[areaMetric]!=null).sort((a,b)=>a.to.values[areaMetric]/a.from.values[areaMetric]-b.to.values[areaMetric]/b.from.values[areaMetric]);
+ const overallTip=`当前所选时间内，${flowMetricLabel(last)} ÷ ${flowMetricLabel(first)} × 100%。`;
+ return `<div class="funnel-insights"><div class="insight-overall" title="${esc(overallTip)}"><span>整体转化率</span><strong>${stageRate(first,last,areaMetric)}</strong></div>${[0,1].map((i)=>{const r=ranked[i];return `<button class="insight-stage" ${r?`data-rate="${r.to.id}" title="${esc(flowRateTip(r))}"`:'disabled'}><span>${i===0?'最大流失环节':'其次'}</span><div>${r?`<strong>${funnelNodeNames[r.from.id]} → ${funnelNodeNames[r.to.id]}</strong><b>${stageRate(r.from,r.to,areaMetric)}</b>`:'—'}</div></button>`}).join('')}</div>`;
+}
+function funnelOverall(){
+ const stages=funnelStages(),first=stages[0],last=stages[stages.length-1];
+ if(!first||!last)return '';
+ const formula=`当前所选时间内，${flowMetricLabel(last)} ÷ ${flowMetricLabel(first)} × 100%。`;
+ return `<div class="funnel-overall" tabindex="0" title="${esc(formula)}" aria-label="整体转化率，${areaMetric===0?'人数':'量'}，${stageRate(first,last,areaMetric)}。${esc(formula)}"><div class="funnel-overall-value"><strong>整体转化率</strong><b>${stageRate(first,last,areaMetric)}</b></div><span>${flowMetricLabel(first)} → ${funnelNodeNames[last.id]}</span></div>`;
+}
+function funnelStartTip(stage,first){
+ const i=areaMetric;
+ return `${funnelNodeNames[stage.id]} · ${i===0?'人数':'量'}\n占起点比例：${stageRate(first,stage,i)}`;
+}
+function unifiedFunnel(){
+ const stages=funnelStages(),rates=flowRates();
+ const names=funnelNodeNames;
+ const bands={exposure:'band-platform',shop:'band-platform',miniTotal:'band-mini',rental:'band-mini',order:'band-mini',verify:'band-mini',deal:'band-mini',review:'band-mini',accept:'band-mini'};
+ const max=Math.max(0,...stages.map(s=>s.values[areaMetric]??0));
+ function arrow(r){const height=76;return `<button class="transition-rate " style="height:${height}px" data-rate="${r.to.id}" title="${esc(flowRateTip(r))}" aria-label="${flowMetricLabel(r.from)}到${flowMetricLabel(r.to)}的转化率，查看公式"><svg style="height:${height}px" viewBox="0 0 24 ${height}" aria-hidden="true"><path d="M 1 1 H 18 V ${height-1} H 4"/><path class="arrow-tip" d="M 8 ${height-6} L 1 ${height-1} L 8 ${height+4}"/></svg><span class="transition-label">${flowMetricLabel(r.from)} <b>→</b> ${flowMetricLabel(r.to)}</span><span class="transition-values single-rate"><strong>${stageRate(r.from,r.to,areaMetric)}</strong></span></button>`}
+ return `${funnelInsights()}<div class="compact-flow-scroll"><div class="compact-flow selected-${areaMetric===0?'uv':'pv'}"><div class="compact-flow-head"><div class="flow-data"><span>阶段</span><button class="metric-column-toggle uv-col" data-area="0" aria-pressed="${areaMetric===0}">人数</button><button class="metric-column-toggle pv-col" data-area="1" aria-pressed="${areaMetric===1}">量</button></div><span aria-hidden="true"></span><div class="rate-head"><span>阶段转化率</span><div><span>${areaMetric===0?'人数转化率':'量转化率'}</span></div></div></div>${stages.map(s=>{
+ const value=s.values[areaMetric],width=value!=null&&max>0?Math.max(0,value)/max*100:0,r=rates.find(r=>r.from.id===s.id);
+ return `<div class="compact-flow-row continuous-row"><div class="flow-data"><button class="flow-label" data-detail="${s.id}"><span>${names[s.id]}</span></button><button data-area="0" class="flow-number metric-col uv-col" aria-label="按人数查看漏斗，${names[s.id]} ${metricValue(s,0)}"><span class="flow-metric-value">${metricValue(s,0)}</span></button><button data-area="1" class="flow-number metric-col pv-col" aria-label="${'按量查看漏斗，'+s.labels[1]+' '+metricValue(s,1)}"><span class="flow-metric-value">${metricValue(s,1)}</span></button></div><div class="flow-plot" data-detail="${s.id}" tabindex="0" data-tooltip="${esc(funnelStartTip(s,stages[0]))}" aria-label="${esc(funnelNodeNames[s.id]+'，占起点比例 '+stageRate(stages[0],s,areaMetric))}">${value==null?`<span class="plot-unavailable">暂无该维度数据</span>`:`<span class="flow-band ${bands[s.id]}" style="width:${width}%;${width===0?'visibility:hidden;':''}"></span>`}</div><div class="flow-rate-cell">${r?arrow(r):''}</div></div>`}).join('')}</div>${funnelOverall()}</div>`;
+}
+function renderFunnelOptions(){
+ $('#funnelNodeOptions').innerHTML=`<div class="funnel-option-title">选择要展示的节点</div>${funnelNodeOrder.map(id=>`<label><input type="checkbox" value="${id}" ${selectedFunnelNodes.has(id)?'checked':''}><span>${funnelNodeNames[id]}</span></label>`).join('')}<div class="funnel-option-foot">按业务顺序展示，至少选择两个节点</div>`;
+ $$('#funnelNodeOptions input').forEach(input=>input.onchange=()=>{if(!input.checked&&selectedFunnelNodes.size<=2){input.checked=true;toast('至少保留两个节点');return}input.checked?selectedFunnelNodes.add(input.value):selectedFunnelNodes.delete(input.value);renderFlow()});
+}
+function renderFlow(){
+ lastFlow=makeFlow();const comparison=mainComparison();lastPrevFlow=comparison.flow;lastPrevSummary=comparison.summary;$('#flowContent').innerHTML=unifiedFunnel();renderFunnelOptions();bindMetricDetails();bindMetricTips();
+ $$('[data-rate]').forEach(b=>b.onclick=()=>rateDetails(b.dataset.rate));
+ $$('[data-area]').forEach(b=>b.onclick=e=>{e.stopPropagation();areaMetric=Number(b.dataset.area);renderFlow()});
+}
+function bindMetricDetails(){$$('[data-detail]').forEach(b=>{b.onclick=()=>metricDetails(b.dataset.detail);if(b.tagName.toLowerCase()==='g')b.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();metricDetails(b.dataset.detail)}}})}
+function metricTip(s,i){
+ const definitions={miniTotal:['统计期内从租赁入口进入小程序的去重访客数，含已登录和未登录。','统计期内从租赁入口进入小程序的页面访问量，含已登录和未登录。'],unlogged:['统计期内未关联登录用户ID的访客数，按访客ID去重；访客登录并关联用户ID后计入已登录访问人数。','统计期内未登录状态下的小程序页面访问量。'],verify:['统计期内认证通过的用户数，按用户去重。','统计期内认证通过的订单数，按订单ID去重。'],review:['统计期内平台审核通过订单对应的去重用户数。','统计期内平台审核通过的订单数，按订单ID去重。'],accept:['统计期内商家评审通过并接单订单的去重用户数。','统计期内商家评审通过并接单的订单数，按订单ID去重。'],ship:['统计期内已发货的订单数，按订单ID去重。'],refund:['统计期内退款成功的订单数，按订单ID去重。','统计期内退款成功的实际退款金额合计。'],exposure:['统计期内看到店铺的去重用户数。','统计期内店铺展示量，重复曝光累加。'],shop:['统计期内进入店铺的去重用户数。','统计期内店铺页面浏览量。'],rental:['统计期内已关联登录用户ID的去重访客人数。','统计期内访问时已登录的小程序页面访问量，重复访问累加。'],group:['统计期内团购商品的访问用户数，按用户去重。'],order:['按订单创建时间统计，所选商品下单用户去重。','按订单创建时间统计，所选商品待付款订单ID去重。'],deal:['按首期支付成功时间统计，成交买家按用户去重。','按首期支付成功时间统计，成交订单按订单ID去重。']};
+ return `数据来源：${s.source}。${definitions[s.id][i]}${s.unavailable?' '+s.unavailable:''}`;
+}
+function bindMetricTips(){
+ if(bindMetricTips.ready){bindMetricTips.close();return}bindMetricTips.ready=true;
+ const tip=$('#metricTooltip');let active=null;
+ const close=()=>{tip.hidden=true;active?.removeAttribute('aria-describedby');active=null};bindMetricTips.close=close;
+ const show=el=>{if(!el){close();return}if(active===el&&!tip.hidden)return;close();active=el;tip.textContent=el.dataset.tooltip;tip.hidden=false;el.setAttribute('aria-describedby','metricTooltip');const r=el.getBoundingClientRect();tip.style.left=Math.max(8,Math.min(r.left,window.innerWidth-tip.offsetWidth-8))+'px';tip.style.top=(r.bottom+tip.offsetHeight+12<window.innerHeight?r.bottom+8:Math.max(8,r.top-tip.offsetHeight-8))+'px'};
+ const target=e=>e instanceof Element&&!e.closest('.period-change')?e.closest('[data-tooltip]'):null;
+ document.addEventListener('pointerover',e=>show(target(e.target)));
+ document.addEventListener('pointerout',e=>show(target(e.relatedTarget)));
+ document.addEventListener('focusin',e=>show(target(e.target)));
+ document.addEventListener('focusout',e=>show(target(e.relatedTarget)));
+ document.addEventListener('click',e=>{const el=target(e.target);if(el?.classList.contains('period-change')){e.stopPropagation();show(el)}},true);
+ document.addEventListener('keydown',e=>{if(e.key==='Escape')close();else if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('period-change')){e.preventDefault();e.stopPropagation();show(e.target)}},true);
+ window.addEventListener('scroll',close,true);window.addEventListener('resize',close);
+}
+const DASHBOARD_GROUPS=[
+ {title:'成交概览',fields:['成交金额（预估）','首期支付金额','成交买家数','成交订单数','成交转化率']},
+ {title:'平台流量',fields:['店铺曝光人数','曝光量','店铺访问人数','店铺浏览量','团购访问人数']},
+ {title:'小程序访问',fields:['小程序总访问人数','小程序总访问量','已登录访问人数','已登录访问量','未登录访问人数','未登录访问量']},
+ {title:'交易与履约',fields:['下单人数','下单量','认证通过人数','认证通过量','平台审核通过人数','平台审核通过订单数','商家接单人数','商家接单量','发货量','退款量','退款金额']}
+];
+const allDashboardFields=DASHBOARD_GROUPS.flatMap(g=>g.fields),dashboardStorageKey='rental-dashboard-metrics-v1';
+let dashboardFields=new Set(allDashboardFields);
+try{const saved=JSON.parse(localStorage.getItem(dashboardStorageKey));if(Array.isArray(saved)&&saved.some(x=>allDashboardFields.includes(x)))dashboardFields=new Set(saved.filter(x=>allDashboardFields.includes(x)))}catch(e){}
+function configureDashboard(){
+ const draft=new Set(dashboardFields);
+ function body(){return `<div class="config-toolbar"><span id="configCount"></span><div><button type="button" class="config-text" id="configAll">全选</button><button type="button" class="config-text" id="configReset">重置</button></div></div><div class="config-groups">${DASHBOARD_GROUPS.map(g=>`<section class="config-group"><div class="config-group-title"><strong>${g.title}</strong><button type="button" class="config-text" data-select-group="${g.title}">全选</button></div><div class="config-options">${g.fields.map(label=>`<label><input type="checkbox" data-config-field="${esc(label)}" ${draft.has(label)?'checked':''}><span>${label}</span></label>`).join('')}</div></section>`).join('')}</div>`}
+ showDialog('指标配置',body(),'<div class="config-footer"><label><input type="checkbox" id="saveDashboardConfig" checked> 保存为默认配置</label><div><button type="button" id="configCancel">取消</button><button type="button" id="configConfirm" class="primary">确认</button></div></div>');
+ const count=()=>{$('#configCount').textContent=`已选 ${draft.size} / ${allDashboardFields.length}`};
+ const refresh=()=>{$$('[data-config-field]').forEach(i=>i.checked=draft.has(i.dataset.configField));count()};count();
+ $$('#dialog [data-config-field]').forEach(i=>i.onchange=()=>{i.checked?draft.add(i.dataset.configField):draft.delete(i.dataset.configField);count()});
+ $('#configAll').onclick=()=>{allDashboardFields.forEach(x=>draft.add(x));refresh()};
+ $('#configReset').onclick=()=>{draft.clear();allDashboardFields.forEach(x=>draft.add(x));refresh()};
+ $$('#dialog [data-select-group]').forEach(b=>b.onclick=()=>{const g=DASHBOARD_GROUPS.find(x=>x.title===b.dataset.selectGroup),all=g.fields.every(x=>draft.has(x));g.fields.forEach(x=>all?draft.delete(x):draft.add(x));refresh()});
+ $('#configCancel').onclick=()=>$('#dialog').close();
+ $('#configConfirm').onclick=()=>{if(!draft.size){toast('请至少选择一个指标');return}dashboardFields=new Set(draft);try{if($('#saveDashboardConfig').checked)localStorage.setItem(dashboardStorageKey,JSON.stringify([...draft]));else localStorage.removeItem(dashboardStorageKey)}catch(e){}$('#dialog').close();renderDash()};
+}
+$('#configureDashboard').onclick=configureDashboard;
+function dashboardStages(){return ['deal','exposure','shop','group','miniTotal','rental','unlogged','order','verify','review','accept','ship','refund'].map(id=>lastFlow.find(s=>s.id===id))}
+function renderDash(){
+ $('#configureDashboard').textContent=`指标配置 ${dashboardFields.size}/${allDashboardFields.length}`;
+ const summary=dealSummary(),lookup=id=>lastFlow.find(s=>s.id===id);
+ function metricButton(s,i){if(!dashboardFields.has(s.labels[i]))return '';return `<button class="dash-metric" data-detail="${s.id}" data-tooltip="${esc(metricTip(s,i))}"><span class="metric-dotted">${s.labels[i]}</span><strong>${metricValue(s,i)} <em>${s.units[i]==='元'?'':s.units[i]}</em></strong>${compareMarkup(s.values[i],previousMetric(s.id,i))}</button>`}
+ function group(title,ids,source){if(!ids.some(id=>lookup(id).labels.some(label=>dashboardFields.has(label))))return '';return `<section class="dash-group ${source==='美团侧'?'dash-platform':'dash-operations'}"><div class="dash-group-head"><h3>${title}</h3>${source?`<span class="dash-source ${source==='美团侧'?'platform-badge':'mini-badge'}">${source}</span>`:''}</div><div class="dash-metric-grid">${ids.flatMap(id=>{const item=lookup(id);return item.labels.map((_,i)=>metricButton(item,i))}).join('')}</div></section>`}
+ const deal=lookup('deal');
+ const extras=[{label:'成交金额（预估）',value:'¥'+money(summary.amount),tip:'来源：租赁成交订单。按成交时间汇总订单成交时约定的租金总额，包含未来未收租金，不含押金。',feature:true,current:summary.amount,prior:lastPrevSummary?.amount},{label:'首期支付金额',value:'¥'+money(summary.firstPayment),tip:'来源：支付成功流水。按首期支付成功时间汇总所选时间内的首期实付租金，支付流水去重；含主动支付及代扣，不含押金、后续期款，不扣减退款。',current:summary.firstPayment,prior:lastPrevSummary?.firstPayment},{label:'成交转化率',value:summary.rate,current:rateNumber(summary.rate),prior:rateNumber(lastPrevSummary?.rate),isRate:true,tip:'当前所选时间内，首期支付成功的去重买家数÷已登录访问的去重用户数×100%。'}];
+ const dealExtra=m=>!dashboardFields.has(m.label)?'':`<button class="dash-metric ${m.feature?'dash-amount':''}" data-detail="deal" data-tooltip="${esc(m.tip)}"><span class="metric-dotted">${m.label}</span><strong>${m.value}</strong>${compareMarkup(m.current,m.prior,m.isRate)}</button>`;
+ $('#overviewGrid').classList.toggle('dashboard-filtered',dashboardFields.size<allDashboardFields.length);
+ $('#overviewGrid').innerHTML=`${DASHBOARD_GROUPS[0].fields.some(x=>dashboardFields.has(x))?`<section class="dash-group dash-deal"><div class="dash-group-head"><h3>成交概览</h3><span class="dash-source mini-badge">小程序侧</span></div><div class="dash-metric-grid deal-grid">${dealExtra(extras[0])}${dealExtra(extras[1])}${deal.labels.map((_,i)=>metricButton(deal,i)).join('')}${dealExtra(extras[2])}</div></section>`:''}${group('平台流量',['exposure','shop','group'],'美团侧')}${group('小程序访问',['miniTotal','rental','unlogged'],'小程序侧')}${group('交易与履约',['order','verify','review','accept','ship','refund'],'小程序侧')}`;
+ bindMetricDetails();bindMetricTips();bindHelp();
+}
+const money=n=>Number(n).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
+function estimatedRentalCents(j){return orderRentalCents(j)*(2+Math.floor(hash(j.k+790)*5))}
+function orderRentalCents(j){const daily=[2990,1990,2490,5990,6990,1990,990,1590][productDefs.findIndex(p=>p.id===j.p.id)];return daily*(7+Math.floor(hash(j.k+780)*24))}
+function productImage(p){
+ const idx=productDefs.findIndex(x=>x.id===p.id),colors=['#647d9c','#b5a9ca','#7b938b','#4d6074','#657079','#788b99','#509a9a','#8497bb'];
+ const color=colors[idx], device=p.cat==='手机'?`<rect x="23" y="9" width="34" height="62" rx="7" fill="${color}"/><rect x="26" y="12" width="28" height="56" rx="5" fill="#dbe5f1"/><path d="M26 47 Q40 18 54 32 V63 Q44 71 26 63" fill="${color}" opacity=".5"/><rect x="34" y="14" width="12" height="3" rx="2" fill="#26394c"/>`:p.cat==='摄影器材'?`<path d="M12 28 H25 L30 20 H49 L54 28 H68 V61 H12Z" fill="${color}"/><circle cx="41" cy="44" r="18" fill="#253242"/><circle cx="41" cy="44" r="13" fill="#637e97"/><circle cx="41" cy="44" r="8" fill="#213f59"/><circle cx="37" cy="40" r="3" fill="#bad4e6"/><rect x="15" y="31" width="9" height="4" rx="1" fill="#a7c1d5"/>`:`<rect x="9" y="23" width="62" height="36" rx="10" fill="${color}"/><rect x="24" y="27" width="32" height="28" rx="3" fill="#253b50"/><path d="M28 47 L38 32 L52 47" fill="#69899d"/><path d="M17 33 V45 M11 39 H23" stroke="#e4edf3" stroke-width="3"/><circle cx="63" cy="36" r="2" fill="#e4edf3"/><circle cx="63" cy="46" r="2" fill="#e4edf3"/>`;
+ return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" rx="8" fill="#f1f4f8"/>${device}</svg>`);
+}
+function metricsFor(p){const js=journeys.filter(j=>j.p.id===p.id&&matching(j,productApplied)),m={p};
+ const get=s=>js.filter(j=>j.depth>=s&&(s!==9||merchantAccepted(j))&&inRange(j.times[s],productApplied));
+ const pair=(name,rs,raw)=>{m[name+'Uv']=unique(rs);m[name+'Raw']=rs.reduce((n,j)=>n+raw(j),0)};
+ const exposures=js.filter(j=>(j.login||j.success)&&!j.direct&&inRange(j.login?j.entry:j.times[4],productApplied));
+ pair('exposure',exposures,()=>1);
+ const visits=rentalRecords(productApplied,p.id);m.browseUv=unique(visits.filter(j=>j.depth>=1));m.browseRaw=rentalViews(visits);
+ m.amount=get(9).reduce((c,j)=>c+estimatedRentalCents(j),0)/100;
+ [['order',7],['deal',9]].forEach(([name,s])=>pair(name,get(s),()=>1));
+ m.exposureVisitUv=unique(exposures.filter(j=>j.depth>=1&&inRange(j.times[1],productApplied)));m.ctr=m.exposureUv?m.exposureVisitUv/m.exposureUv:null;m.dealRate=m.browseUv?m.dealUv/m.browseUv:null;
+ m.activity=Object.entries(m).some(([k,v])=>k.endsWith('Raw')&&v>0);return m;
+}
+function visibleProducts(){return productDefs.filter(p=>selectedProduct(p,productApplied)).map(metricsFor).filter(m=>m.activity)}
+function productFunnel(id){const p=productDefs.find(x=>x.id===id),m=metricsFor(p),conversion=pct(m.dealUv,m.browseUv);
+ showDialog(p.name+' · 租赁商品数据',`<div class="detail-product-head"><img src="${productImage(p)}" width="48" height="48" alt="商品示意图"><div><strong>${esc(p.name)}</strong><small>商品ID：${p.id} · ${productApplied.start} 至 ${productApplied.end}</small></div></div><h3 class="detail-section-title">成交数据</h3><div class="detail-metrics deal-metrics"><div><span>成交买家数</span><strong>${fmt(m.dealUv)}</strong></div><div><span>成交订单数</span><strong>${fmt(m.dealRaw)}</strong></div><div class="detail-amount-feature" title="统计期内成交订单在成交时约定的租金总额，包含未来未收租金，不含押金"><span>成交金额（预估）</span><strong>¥${money(m.amount)}</strong></div><div title="成交买家数 ÷ 商品访问人数 × 100%"><span>商品访问-成交转化率</span><strong>${conversion}</strong><small>访问 → 成交</small></div></div><p class="detail-formula">商品访问-成交转化率 = 成交人数 ÷ 商品访问人数 × 100%。</p><h3 class="detail-section-title">访问与下单</h3><div class="detail-metrics"><div><span>商品访问人数</span><strong>${fmt(m.browseUv)}</strong></div><div><span>商品浏览量</span><strong>${fmt(m.browseRaw)}</strong></div><div><span>下单人数</span><strong>${fmt(m.orderUv)}</strong></div><div><span>下单量</span><strong>${fmt(m.orderRaw)}</strong></div></div>`)
+}
+function productTotals(rows){
+ const total={};COLS.forEach(([key])=>{if(!['ctr','dealRate'].includes(key))total[key]=rows.reduce((sum,m)=>sum+(m[key]||0),0)});
+ total.exposureUv=rows.reduce((sum,m)=>sum+m.exposureUv,0);
+ total.amount=Math.round(total.amount*100)/100;
+ total.exposureVisitUv=rows.reduce((sum,m)=>sum+m.exposureVisitUv,0);total.ctr=total.exposureUv?total.exposureVisitUv/total.exposureUv:null;
+ total.dealRate=total.browseUv?total.dealUv/total.browseUv:null;return total;
+}
+function productValue(m,key){if(m[key]==null)return '—';return ['ctr','dealRate'].includes(key)?(m[key]==null?'—':(m[key]*100).toFixed(2)+'%'):key==='amount'?'¥'+money(m[key]):fmt(m[key])}
+function productFormula(key){return key==='ctr'?'曝光用户中点击进入商品的去重人数 ÷ 商品曝光人数 × 100%':key==='dealRate'?'成交人数 ÷ 商品访问人数 × 100%':''}
+function productMetricTip(key,total=false){
+ const definitions={
+ exposureRaw:'来源：小程序商品卡片曝光事件。统计期内授权登录后的商品卡片曝光量，重复曝光累加。',
+ exposureUv:'来源：小程序商品卡片曝光事件。统计期内授权登录后看到该商品卡片的用户数，按用户去重。',
+ browseUv:'来源：小程序授权后商品浏览事件。统计期内浏览该商品详情的用户数，按用户去重。',
+ browseRaw:'来源：小程序授权后浏览事件。统计期内该租赁商品页面浏览量，重复浏览累加。',
+ ctr:'来源：小程序商品卡片曝光与点击事件。公式：'+productFormula('ctr')+'。采用同一商品、同一统计期的曝光与点击数据。',
+ orderUv:'来源：租赁订单。按订单创建时间统计，成功创建该商品待付款订单的用户数，按用户去重。',
+ orderRaw:'来源：租赁订单。按订单创建时间统计，该商品成功创建的待付款订单数，按订单ID去重。',
+ dealUv:'来源：租赁成交订单。按成交时间统计，该商品的成交买家数，按用户去重。',
+ dealRaw:'来源：租赁成交订单。按成交时间统计，该商品的成交订单数，按订单ID去重。',
+ amount:'来源：租赁成交订单。公式：统计期内该商品成交订单在成交时约定的租金总额之和，包含未来未收租金，不含押金。',
+ dealRate:'来源：小程序授权后访问事件、租赁成交订单。公式：'+productFormula('dealRate')+'。'
+ };
+ if(total)return ['ctr','dealRate'].includes(key)?'合计公式：当前筛选全部商品的对应分子之和 ÷ 对应分母之和 × 100%，包含所有分页。\n'+definitions[key]:'合计范围：当前筛选全部商品的该列数值之和，包含所有分页；人数按各商品分别去重后求和。'+'\n'+definitions[key];
+ return definitions[key];
+}
+function renderTable(){
+ const rows=visibleProducts();
+ rows.sort((a,b)=>((a[sortKey]??-1)-(b[sortKey]??-1))*sortDir||a.p.id.localeCompare(b.p.id));lastTable=rows;
+ const size=pageSize,maxPage=Math.max(1,Math.ceil(rows.length/size));page=Math.min(page,maxPage);const cols=COLS.filter(([key])=>!hidden.has(key));
+ $('#tableWrap').innerHTML=rows.length?`<table><thead><tr><th>商品名称</th>${cols.map(([key,label])=>`<th class="${key==='amount'?'amount-column':''}"><button data-sort="${key}" data-tooltip="${esc(productMetricTip(key))}" aria-label="按${label}排序"><span class="metric-dotted">${label}</span> ${sortKey===key?(sortDir===-1?'↓':'↑'):'↕'}</button></th>`).join('')}</tr></thead><tbody><tr class="product-total"><th scope="row"><span title="当前筛选下全部商品的各行数值求和，含所有分页；人数未跨商品去重。比率按合计分子÷合计分母重算。" class="metric-dotted">合计</span></th>${cols.map(([key])=>`<td class="${key==='amount'?'amount-column':''}" data-tooltip="${esc(productMetricTip(key,true))}">${productValue(productTotals(rows),key)}</td>`).join('')}</tr>${rows.slice((page-1)*size,page*size).map(m=>`<tr><td><div class="product-cell"><img src="${productImage(m.p)}" alt="${esc(m.p.name)}示意图" width="48" height="48"><div><button class="product-name" data-product="${m.p.id}">${esc(m.p.name)}</button><div class="product-id">商品ID：${m.p.id}</div></div></div></td>${cols.map(([key])=>`<td class="${key==='amount'?'amount-column':''}" data-tooltip="${esc(productMetricTip(key))}">${productValue(m,key)}</td>`).join('')}</tr>`).join('')}</tbody></table>`:'<div class="empty">没有符合条件的示例数据。<br>可调整商品筛选条件。</div>';
+ productPager.setState({total:rows.length,page,pageSize});
+ $$('[data-sort]').forEach(b=>b.onclick=()=>{if(sortKey===b.dataset.sort)sortDir*=-1;else{sortKey=b.dataset.sort;sortDir=-1}renderTable()});
+ $$('[data-product]').forEach(b=>b.onclick=()=>productFunnel(b.dataset.product));
+ bindMetricTips();
+}
+function parseIds(value){return [...new Set(value.trim().split(/[\s,，;；、]+/).filter(Boolean).map(id=>id.replace(/^SPU-/i,'')))]}
+function applyProductFilters(){
+ productApplied={...baseScope,start:applied.start,end:applied.end,category:$('#category').value,search:$('#search').value.trim(),ids:parseIds($('#productIds').value)};
+ page=1;$('#filterStatus').textContent='';renderTable();$('#tableWrap').scrollLeft=0;
+ const missing=productApplied.ids.filter(id=>!productDefs.some(p=>p.id===id));
+ $('#idHint').textContent=missing.length?'未匹配商品ID：'+missing.join('、'):'';toast('商品数据已更新')
+}
+function renderMain(){
+ renderFlow();renderDash();
+}
+$('#productFilters').addEventListener('submit',e=>{e.preventDefault();applyProductFilters()});
+$('#resetFilters').onclick=()=>{$('#category').value='all';$('#search').value='';$('#productIds').value='';applyProductFilters()};
+['category','search','productIds'].forEach(id=>$('#'+id).addEventListener('input',()=>{$('#filterStatus').textContent='筛选已修改，请查询'}));
+function csvDownload(name,rows){const safe=v=>{const s=String(v??'');return '"'+(/^[=+@\-]/.test(s)?"'"+s:s).replace(/"/g,'""')+'"'};const blob=new Blob(['\uFEFF'+rows.map(r=>r.map(safe).join(',')).join('\r\n')],{type:'text/csv;charset=utf-8;'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name+'.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast('已导出CSV（示例数据）')}
+function meta(scope='main'){const range=scope==='product'?productApplied:applied;return [['说明','示例数据，非真实业务'],['统计模块',scope==='product'?'商品列表':'经营链路及看板'],['开始日期',range.start,'结束日期',range.end],['商品类目',range.category,'商品名称',range.search,'商品ID组合',range.ids.join('、')],['时间口径','Asia/Shanghai，按各指标对应的业务发生时间统计'],['范围说明',scope==='product'?'商品模块独立筛选；每件商品内按用户去重':'全部商品，仅按顶部时间筛选']]}
+function rateExport(){return [['阶段转化率'],['环节','人数分子','人数分母','人数转化率/占比','量分子','量分母','量转化率/占比'],...flowRates().map(r=>[r.name,r.to.labels[0],r.from.labels[0],stageRate(r.from,r.to,0),r.to.labels[1],r.from.labels[1],stageRate(r.from,r.to,1)])]}
+function funnelExport(){return [['经营链路：人数与量同时展示'],['层级','环节','人数指标','人数','量指标','量','单位','来源','备注'],...funnelStages().map(s=>[s.level,s.name,s.labels[0],s.values[0]==null?'—':s.values[0],s.labels[1],s.values[1]==null?'—':s.values[1],s.units[1],s.source,s.unavailable||s.note]),[],...rateExport()] }
+function productExport(){
+ const cols=COLS,total=productTotals(lastTable);
+ const values=m=>cols.map(([k])=>['ctr','dealRate'].includes(k)?(m[k]==null?'—':(m[k]*100).toFixed(2)+'%'):(m[k]??'—'));
+ return [['商品ID','商品名称','类目',...cols.map(c=>c[1])],['','合计','',...values(total)],...lastTable.map(m=>[m.p.id,m.p.name,m.p.cat,...values(m)])];
+}
+$('#exportProducts').onclick=()=>downloadExcel(`租赁商品数据_${productApplied.start}_${productApplied.end}_示例`,productExport());
+function reportRows(){
+ const original=applied,ids=funnelNodeOrder.filter(id=>selectedFunnelNodes.has(id));
+ function snapshot(range){
+  applied=range;
+  const flow=makeFlow(),lookup=id=>flow.find(x=>x.id===id),d=dealSummary();
+  const stages=ids.map(lookup).filter(Boolean);
+  const basic=[d.amount,d.firstPayment,...lookup('deal').values, d.rate];
+  for(const id of ['exposure','shop','group','miniTotal','rental','unlogged','order','verify','review','accept','ship','refund'])basic.push(...lookup(id).values);
+  const rates=stages.slice(1).flatMap((stage,i)=>[stageRate(stages[i],stage,0),stageRate(stages[i],stage,1)]);
+  const first=stages[0],last=stages[stages.length-1];
+  return [...basic,...rates,stageRate(first,last,0),stageRate(first,last,1)];
+ }
+ const basicFields=['成交金额（预估）','首期支付金额','成交买家数','成交订单数','成交转化率',...['exposure','shop','group','miniTotal','rental','unlogged','order','verify','review','accept','ship','refund'].flatMap(id=>lastFlow.find(s=>s.id===id).labels)];
+ const labels=['统计时间','成交金额（预估）','首期支付金额','成交买家数','成交订单数','成交转化率',...['exposure','shop','group','miniTotal','rental','unlogged','order','verify','review','accept','ship','refund'].flatMap(id=>lastFlow.find(s=>s.id===id).labels),...ids.slice(1).flatMap((id,i)=>[`${funnelNodeNames[ids[i]]}→${funnelNodeNames[id]}转化率（人数）`,`${funnelNodeNames[ids[i]]}→${funnelNodeNames[id]}转化率（量）`]),`${funnelNodeNames[ids[0]]}→${funnelNodeNames[ids.at(-1)]}整体转化率（人数）`,`${funnelNodeNames[ids[0]]}→${funnelNodeNames[ids.at(-1)]}整体转化率（量）`];
+ try{
+  const rows=[labels,['合计',...snapshot(original)]];
+  for(let day=stamp(original.start);day<=stamp(original.end);day+=DAY){const date=dateLabel(day);rows.push([date,...snapshot({...original,start:date,end:date})])}
+  const visibleColumns=[0,...basicFields.flatMap((label,i)=>dashboardFields.has(label)?[i+1]:[]),...Array.from({length:labels.length-basicFields.length-1},(_,i)=>basicFields.length+1+i)];
+  return rows.map(row=>visibleColumns.map(i=>row[i]));
+ }finally{applied=original}
+}
+function xlsxBytes(rows){
+ const encode=new TextEncoder(),xml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+ const col=n=>{let x='';for(n++;n;n=Math.floor((n-1)/26))x=String.fromCharCode(65+(n-1)%26)+x;return x};
+ const sheetRows=rows.map((row,r)=>`<row r="${r+1}">${row.map((v,c)=>{const ref=col(c)+(r+1),style=r===0?1:r===1?2:0;if(typeof v==='number'&&Number.isFinite(v))return `<c r="${ref}" s="${style}"><v>${v}</v></c>`;return `<c r="${ref}" t="inlineStr" s="${style}"><is><t xml:space="preserve">${xml(v??'—')}</t></is></c>`}).join('')}</row>`).join('');
+ const files={
+  '[Content_Types].xml':`<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>`,
+  '_rels/.rels':`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>`,
+  'xl/workbook.xml':`<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="看板与漏斗" sheetId="1" r:id="rId1"/></sheets></workbook>`,
+  'xl/_rels/workbook.xml.rels':`<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`,
+  'xl/styles.xml':`<?xml version="1.0" encoding="UTF-8"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Arial"/></font><font><b/><sz val="11"/><name val="Arial"/></font></fonts><fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFEDEFF0"/><bgColor indexed="64"/></patternFill></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFill="1" applyFont="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/></cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>`,
+  'xl/worksheets/sheet1.xml':`<?xml version="1.0" encoding="UTF-8"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane xSplit="1" ySplit="1" topLeftCell="B2" activePane="bottomRight" state="frozen"/></sheetView></sheetViews><cols><col min="1" max="1" width="16" customWidth="1"/><col min="2" max="${rows[0].length}" width="27" customWidth="1"/></cols><sheetData>${sheetRows}</sheetData><autoFilter ref="A1:${col(rows[0].length-1)}${rows.length}"/></worksheet>`
+ };
+ function crc(bytes){let c=0xffffffff;for(const b of bytes){c^=b;for(let i=0;i<8;i++)c=(c>>>1)^((c&1)?0xedb88320:0)}return (c^0xffffffff)>>>0}
+ const locals=[],central=[];let offset=0;
+ function header(size){const buf=new Uint8Array(size);return [buf,new DataView(buf.buffer)]}
+ for(const [name,content] of Object.entries(files)){
+  const filename=encode.encode(name),data=encode.encode(content),checksum=crc(data),[local,l]=header(30);l.setUint32(0,0x04034b50,true);l.setUint16(4,20,true);l.setUint16(6,0x800,true);l.setUint32(14,checksum,true);l.setUint32(18,data.length,true);l.setUint32(22,data.length,true);l.setUint16(26,filename.length,true);locals.push(local,filename,data);
+  const [entry,e]=header(46);e.setUint32(0,0x02014b50,true);e.setUint16(4,20,true);e.setUint16(6,20,true);e.setUint16(8,0x800,true);e.setUint32(16,checksum,true);e.setUint32(20,data.length,true);e.setUint32(24,data.length,true);e.setUint16(28,filename.length,true);e.setUint32(42,offset,true);central.push(entry,filename);offset+=local.length+filename.length+data.length;
+ }
+ const centralSize=central.reduce((n,b)=>n+b.length,0),[end,e]=header(22);e.setUint32(0,0x06054b50,true);e.setUint16(8,Object.keys(files).length,true);e.setUint16(10,Object.keys(files).length,true);e.setUint32(12,centralSize,true);e.setUint32(16,offset,true);
+ const chunks=[...locals,...central,end],out=new Uint8Array(chunks.reduce((n,b)=>n+b.length,0));let at=0;for(const chunk of chunks){out.set(chunk,at);at+=chunk.length}return out;
+}
+function downloadExcel(name,rows){
+ const bytes=xlsxBytes(rows),blob=new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=name+'.xlsx';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(link.href),1000);toast('已导出数据');
+}
+$('#exportDashboard').onclick=()=>downloadExcel(`数据看板与漏斗_${applied.start}_${applied.end}_示例`,reportRows());
+const helps={
+ products:['商品指标口径','<p>访问与浏览统计授权登录后的租赁商品行为。商品访问人数按用户去重，浏览量按页面展示事件累加。</p><p>成交金额（预估）为统计期内成交订单在成交时约定的租金总额，包含未来未收租金，不含押金。商品访问-成交转化率=该商品成交买家数÷商品访问人数×100%。</p><p>全局时间联动看板、漏斗和商品数据；商品类目、名称及商品ID筛选用于列表、详情与商品导出。多个商品ID按或匹配、类目名称按且匹配；每件商品内按用户去重。</p><p>商品曝光-访问点击率=曝光用户中点击进入商品的去重人数÷商品曝光人数×100%；商品访问-成交转化率=成交人数÷商品访问人数。合计为当前筛选全部商品各行求和，包含所有分页；人数未跨商品去重，比率用合计分子÷合计分母重算。</p>'],
+ funnel:['漏斗与宽度计算','<p>按需选择店铺曝光、店铺访问、小程序访问、已登录访问、下单、认证通过、平台审核通过、商家接单及首期支付成功等节点，按业务顺序展示。小程序访问包含已登录与未登录，人数按统计期内是否关联登录用户ID分组，访问量按行为发生时的登录状态统计。人数按访客去重；量按事件或订单统计。</p><p>每层宽度=当前层所选指标÷各层所选指标最大值×绘图区宽度。0值宽度为0，缺失显示“—”。</p><p>阶段转化率=下一步指标÷上一步指标×100%。人数按各节点的用户分别去重，量按各节点的访问事件或订单统计；取当前所选时间内的数据。</p>'],
+ dashboard:['数据来源与统计口径','<p>店铺曝光、访问与浏览来源于美团平台；团购访问人数来源于美团后台团购报表；小程序访问与浏览来源于已登录及未登录行为事件；下单与成交来源于租赁订单。</p><p>小程序访问人数按统计期内是否关联登录用户ID分组去重，访问量按行为发生时的登录状态统计；浏览量按事件累加，订单数按订单ID去重。</p><p>成交金额（预估）=统计期内成交订单在成交时约定的租金总额之和，包含未来未收租金，不含押金；来源：支付成功流水。按首期支付成功时间汇总所选时间内的首期实付租金，支付流水去重；含主动支付及代扣，不含押金、后续期款，不扣减退款。成交转化率=成交买家数÷已登录访问人数×100%。</p>']};
+function bindHelp(){$$('[data-help]').forEach(b=>b.onclick=()=>{const [t,h]=helps[b.dataset.help];showDialog(t,h)})}
+$$('.sidebar nav a').forEach(a=>a.onclick=()=>{$$('.sidebar nav a').forEach(x=>x.classList.toggle('active',x===a))});
+const obs=new IntersectionObserver(entries=>{for(const e of entries)if(e.isIntersecting)$$('.sidebar nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id))},{rootMargin:'-10% 0px -60% 0px'});['dashboard','funnel','products'].forEach(id=>obs.observe($('#'+id)));
+globalPicker=new RentalDatePicker($('#globalDate'),{label:'全局统计时间',onChange:value=>{applied={...applied,start:value.start,end:value.end};productApplied={...productApplied,start:value.start,end:value.end};page=1;renderMain();renderTable()}});
+productPager=new PrototypePagination($('#productPagination'),{pageSize,onChange:state=>{page=state.page;pageSize=state.pageSize;renderTable()}});
+renderMain();renderTable();bindHelp();
+
+const stickyTimeBar=$('#globalTimeBar');
+new ResizeObserver(()=>document.documentElement.style.setProperty('--sticky-filter-height',stickyTimeBar.offsetHeight+'px')).observe(stickyTimeBar);
+</script></body></html>
