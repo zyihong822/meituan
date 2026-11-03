@@ -27,8 +27,8 @@ const baseScope={source:'rental',store:'all',category:'all',search:'',login:'all
 let applied={...baseScope,start:'2026-10-17',end:'2026-10-23',ids:[]};
 let productApplied={...applied,ids:[]};
 let areaMetric=0;
-const funnelNodeOrder=['exposure','shop','miniTotal','rental','order','verify','review','accept','deal'];
-let selectedFunnelNodes=new Set(['exposure','shop','miniTotal','rental','order','verify','deal','review','accept']);
+const funnelNodeOrder=['exposure','shop','miniTotal','rental','order','deal','verify','review','accept'];
+let selectedFunnelNodes=new Set(['exposure','shop','miniTotal','rental','order','deal','verify','review','accept']);
 const funnelNodeNames={exposure:'店铺曝光',shop:'店铺访问',miniTotal:'小程序总访问',rental:'已登录访问',order:'租赁下单',verify:'认证通过',deal:'首期支付成功',review:'平台审核通过',accept:'商家接单'};
 let sortKey='browseUv',sortDir=-1,page=1,pageSize=10;
 let hidden=new Set(),lastFlow=[],lastTable=[],globalPicker,productPager,lastPrevFlow=null,lastPrevSummary=null;
@@ -65,10 +65,11 @@ function toast(msg){$('#toast').textContent=msg;$('#toast').classList.add('show'
 function showDialog(title,body,footer=''){const d=$('#dialog');$('#dialogTitle').textContent=title;$('#dialogBody').innerHTML=body;$('#dialogFooter').innerHTML=footer||'<button class="primary" id="dialogDone">知道了</button>';if(!d.open)d.showModal();$('#dialogDone')?.addEventListener('click',()=>d.close())}
 $('#closeDialog').onclick=()=>$('#dialog').close();$('#dialog').addEventListener('click',e=>{if(e.target===$('#dialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close()}});
 function depositPassed(j){return j.depth>=7&&hash(j.k+1200)<.90}
-function verificationPassed(j){return depositPassed(j)&&hash(j.k+1210)<.90}
+function firstPaymentSucceeded(j){return j.depth>=9&&depositPassed(j)}
+function verificationPassed(j){return firstPaymentSucceeded(j)&&hash(j.k+1210)<.90}
 function platformPassed(j){return verificationPassed(j)&&hash(j.k+1250)<.83}
 function merchantAccepted(j){return platformPassed(j)&&hash(j.k+1220)<.85}
-function stageRecords(stage,range=applied,pid=null){return journeys.filter(j=>matching(j,range)&&(!pid||j.p.id===pid)&&j.depth>=stage&&(stage!==9||merchantAccepted(j))&&inRange(j.times[stage],range))}
+function stageRecords(stage,range=applied,pid=null){return journeys.filter(j=>matching(j,range)&&(!pid||j.p.id===pid)&&j.depth>=stage&&(stage!==9||firstPaymentSucceeded(j))&&inRange(j.times[stage],range))}
 function loggedInRange(j,range=applied){return j.login?inRange(j.entry,range):j.success&&inRange(j.times[3],range)}
 function rentalRecords(range=applied,pid=null){return journeys.filter(j=>matching(j,range)&&(!pid||j.p.id===pid)&&inRange(j.entry,range)&&loggedInRange(j,range))}
 function rentalViews(records){return records.reduce((n,j)=>n+(j.depth>=1?j.raw[1]:1),0)}
@@ -85,8 +86,8 @@ function makeFlow(){
  const shopUv=visitIds.size,shopPv=platformJs.length*4+Math.floor(platformJs.length*.35),rentUv=unique(rental);
  const candidates=journeys.filter(j=>matching(j)&&j.depth>=7);
  const activity=(offset,threshold,days)=>candidates.filter(j=>hash(j.k+offset)<threshold&&inRange(j.times[7]+Math.floor(hash(j.k+offset+1)*days)*DAY));
- const verify=candidates.filter(j=>verificationPassed(j)&&inRange(j.times[7]+20*60000));
- const reviewedAll=candidates.filter(platformPassed),reviewTime=j=>j.times[7]+3600000,reviewed=reviewedAll.filter(j=>inRange(reviewTime(j)));
+ const verify=candidates.filter(j=>verificationPassed(j)&&inRange(j.times[9]+20*60000));
+ const reviewedAll=candidates.filter(platformPassed),reviewTime=j=>j.times[9]+3600000,reviewed=reviewedAll.filter(j=>inRange(reviewTime(j)));
  const accepted=reviewedAll.filter(j=>merchantAccepted(j)&&inRange(reviewTime(j)+3600000)),shipped=activity(1230,.52,3),refunded=activity(1240,.18,4);
 
  const result=[
@@ -99,7 +100,7 @@ function makeFlow(){
  {id:'miniTotal',level:'03',name:'小程序总访问',source:'小程序访问事件',labels:['小程序总访问人数','小程序总访问量'],values:[unique(visits),totalPv],units:['人','次'],note:'统计期内来自租赁入口的小程序访问，包含已登录和未登录；人数按匿名访客与账号关联后去重。'},
  {id:'unlogged',level:'',name:'未登录访问',source:'小程序访问事件',labels:['未登录访问人数','未登录访问量'],values:[unloggedIds.size,totalPv-rentPv],units:['人','次'],note:'统计期内未关联登录用户ID的访客数，按访客ID去重；访客登录并关联用户ID后计入已登录访问人数。访问量按访问时未登录的行为统计。'},
  {id:'verify',level:'',name:'认证通过',source:'认证服务结果',labels:['认证通过人数','认证通过量'],values:[unique(verify),verify.length],units:['人','单'],note:'按认证通过时间统计，人数按用户去重，量按认证通过的订单ID去重。'},
- {id:'review',level:'',name:'平台审核通过',source:'平台审核记录',labels:['平台审核通过人数','平台审核通过订单数'],values:[unique(reviewed),reviewed.length],units:['人','单'],note:'统计期内平台审核通过的去重用户数和订单数；平台审核发生在商家接单和支付之前。'},
+ {id:'review',level:'',name:'平台审核通过',source:'平台审核记录',labels:['平台审核通过人数','平台审核通过订单数'],values:[unique(reviewed),reviewed.length],units:['人','单'],note:'统计期内平台审核通过的去重用户数和订单数；平台审核发生在认证通过之后、商家接单之前。'},
  {id:'accept',level:'',name:'商家接单',source:'租赁订单状态记录',labels:['商家接单人数','商家接单量'],values:[unique(accepted),accepted.length],units:['人','单'],note:'统计期内商家评审通过并接单的订单数及对应用户数，分别按订单ID和用户去重。'},
  {id:'ship',level:'',name:'发货',source:'物流发货记录',labels:['发货量'],values:[shipped.length],units:['单'],note:'统计期内至少发生一次发货的订单数，按订单ID去重。'},
  {id:'refund',level:'',name:'退款',source:'退款记录',labels:['退款量','退款金额'],values:[refunded.length,refunded.reduce((n,j)=>n+orderRentalCents(j),0)/100],units:['单','元'],note:'退款量按统计期内退款成功的订单ID去重；退款金额按退款成功时间累计实际退款金额。'},
@@ -224,7 +225,7 @@ function productImage(p){
  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" rx="8" fill="#f1f4f8"/>${device}</svg>`);
 }
 function metricsFor(p){const js=journeys.filter(j=>j.p.id===p.id&&matching(j,productApplied)),m={p};
- const get=s=>js.filter(j=>j.depth>=s&&(s!==9||merchantAccepted(j))&&inRange(j.times[s],productApplied));
+ const get=s=>js.filter(j=>j.depth>=s&&(s!==9||firstPaymentSucceeded(j))&&inRange(j.times[s],productApplied));
  const pair=(name,rs,raw)=>{m[name+'Uv']=unique(rs);m[name+'Raw']=rs.reduce((n,j)=>n+raw(j),0)};
  const exposures=js.filter(j=>(j.login||j.success)&&!j.direct&&inRange(j.login?j.entry:j.times[4],productApplied));
  pair('exposure',exposures,()=>1);
@@ -342,7 +343,7 @@ function downloadExcel(name,rows){
 $('#exportDashboard').onclick=()=>downloadExcel(`数据看板与漏斗_${applied.start}_${applied.end}_示例`,reportRows());
 const helps={
  products:['商品指标口径','<p>访问与浏览统计授权登录后的租赁商品行为。商品访问人数按用户去重，浏览量按页面展示事件累加。</p><p>成交金额（预估）为统计期内成交订单在成交时约定的租金总额，包含未来未收租金，不含押金。商品访问-成交转化率=该商品成交买家数÷商品访问人数×100%。</p><p>全局时间联动看板、漏斗和商品数据；商品类目、名称及商品ID筛选用于列表与商品导出。多个商品ID按或匹配、类目名称按且匹配；每件商品内按用户去重。</p><p>商品曝光-访问点击率=曝光用户中点击进入商品的去重人数÷商品曝光人数×100%；商品访问-成交转化率=成交人数÷商品访问人数。合计为当前筛选全部商品各行求和，包含所有分页；人数未跨商品去重，比率用合计分子÷合计分母重算。</p>'],
- funnel:['漏斗与宽度计算','<p>按需选择店铺曝光、店铺访问、小程序访问、已登录访问、下单、认证通过、平台审核通过、商家接单及首期支付成功等节点，按业务顺序展示。小程序访问包含已登录与未登录，人数按统计期内是否关联登录用户ID分组，访问量按行为发生时的登录状态统计。人数按访客去重；量按事件或订单统计。</p><p>每层宽度=当前层所选指标÷各层所选指标最大值×绘图区宽度。0值宽度为0，缺失显示“—”。</p><p>阶段转化率=下一步指标÷上一步指标×100%。人数按各节点的用户分别去重，量按各节点的访问事件或订单统计；取当前所选时间内的数据。</p>'],
+ funnel:['漏斗与宽度计算','<p>按需选择店铺曝光、店铺访问、小程序访问、已登录访问、下单、首期支付成功、认证通过、平台审核通过及商家接单等节点，按业务顺序展示。小程序访问包含已登录与未登录，人数按统计期内是否关联登录用户ID分组，访问量按行为发生时的登录状态统计。人数按访客去重；量按事件或订单统计。</p><p>每层宽度=当前层所选指标÷各层所选指标最大值×绘图区宽度。0值宽度为0，缺失显示“—”。</p><p>阶段转化率=下一步指标÷上一步指标×100%。人数按各节点的用户分别去重，量按各节点的访问事件或订单统计；取当前所选时间内的数据。</p>'],
  dashboard:['数据来源与统计口径','<p>店铺曝光、访问与浏览来源于美团平台；团购访问人数来源于美团后台团购报表；小程序访问与浏览来源于已登录及未登录行为事件；下单与成交来源于租赁订单。</p><p>小程序访问人数按统计期内是否关联登录用户ID分组去重，访问量按行为发生时的登录状态统计；浏览量按事件累加，订单数按订单ID去重。</p><p>成交金额（预估）=统计期内成交订单在成交时约定的租金总额之和，包含未来未收租金，不含押金；来源：支付成功流水。按首期支付成功时间汇总所选时间内的首期实付租金，支付流水去重；含主动支付及代扣，不含押金、后续期款，不扣减退款。当前所选时间内，首期支付成功的去重买家数 ÷ 小程序总访问人数 × 100%。小程序总访问人数为未登录访问人数与已登录访问人数之和。</p>']};
 function bindHelp(){$$('[data-help]').forEach(b=>b.onclick=()=>{const [t,h]=helps[b.dataset.help];showDialog(t,h)})}
 $$('.sidebar nav a').forEach(a=>a.onclick=()=>{$$('.sidebar nav a').forEach(x=>x.classList.toggle('active',x===a))});
